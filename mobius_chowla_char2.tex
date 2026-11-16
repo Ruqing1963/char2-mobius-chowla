@@ -25,6 +25,8 @@
 
 \title[M\"obius cancellation and Chowla correlations in characteristic $2$]{Short-interval M\"obius sums, Chowla
 correlations, and polynomial M\"obius sums in characteristic \texorpdfstring{$2$}{2}}
+\thanks{Code and data: \url{https://github.com/Ruqing1963/char2-mobius-chowla}\newline(archived at DOI
+10.5281/zenodo.24267751).}
 \author{Ruqing Chen}
 \address{GUT Geoservice Inc., Montreal, Canada}
 \email{ruqing@hotmail.com}
@@ -112,9 +114,11 @@ Our starting point is a structural theorem showing that although $\tau(H)$ is a 
 $(h_2,\dots,h_{d-1})$, its restriction $\tau_f(B_0,B_1)=\tau(H_f+B_1t+B_0)$ to any short interval $I_2(f)$ has an
 exceptionally simple algebraic form in $(B_0,B_1)$. Write $H_f(t)=V_f(t^2)+tU_f(t^2)$, so that
 \[
-U_f(u)=\sum_{\substack{3\le j\le d-1\\ j\text{ odd}}}h_j u^{(j-1)/2},\qquad
-V_f(u)=\sum_{\substack{2\le j\le d\\ j\text{ even}}}h_j u^{j/2}\quad(h_d=1).
+U_f(u)=\sum_{\substack{3\le j\le d\\ j\text{ odd}}}h_j u^{(j-1)/2},\qquad
+V_f(u)=\sum_{\substack{2\le j\le d\\ j\text{ even}}}h_j u^{j/2}\qquad(h_d=1).
 \]
+Thus $U_f(0)=V_f(0)=0$; if $d=2e$ is even, $V_f$ is monic of degree $e$ and $\deg U_f\le e-1$, and if $d=2e+1$ is
+odd, $U_f$ is monic of degree $e$ and $\deg V_f\le e$.
 
 \begin{theorem}[bi-affine and $\Ftwo$-affine structure of $\tau_f$]\label{thm:structure}
 Let $q=2^k$, $n=2d\ge 4$, and let $f\in\Fq[t]$ be monic of degree $n$ with $\deg f'\le 1$.
@@ -240,7 +244,7 @@ and unconditionally for every $n=8m+4\ge 12$, $e=2m+1$, with $\deg U_f=m$, where
 $T_1(f)=h_{2m+1}^2\ne 0$). Then the geometric Galois group of $f+A_2t^2+A_1t+A_0$ over
 $\overline{\mathbb F}_q(A_0,A_1,A_2)$ is $S_n$ and
 $\bigl|\sum_{F\in I_2(f)}\mu(F)\bigr|\le q^2$ (equal to $0$ when $n=4$ or exactly one of $T_1(f),h_{d-1}$ is nonzero,
-and to $-(-1)^{k\epsilon_d}q^2$ when $T_1(f)=h_{d-1}=0$), yet $\mu(F+c_0)=\mu(F)$ for every
+to $-(-1)^{k\epsilon_d}q^2$ when $T_1(f)=h_{d-1}=0$, and to $\pm q^2$ when $T_1(f)h_{d-1}\ne0$), yet $\mu(F+c_0)=\mu(F)$ for every
 $F\in I_2(f)$ and every constant $c_0\in\Fq$, and for any distinct $c_1,c_2\in\Fq$ the $2$-point Chowla sum satisfies
 \[
 \sum_{F\in I_2(f)}\mu(F+c_1)\mu(F+c_2)=q^2(q-1).
@@ -256,7 +260,9 @@ $x,\,x+u,\,x+v,\,x+u+v$ of an $\Ftwo$-affine plane in $\Fq^2$), then $\Theta_c=0
 \end{theorem}
 
 Our third application addresses a problem posed by Sawin and Shusterman in \cite[\S1.5]{SS}, who asked for
-cancellation in ``polynomial M\"obius sums'' of the form $\sum_{H\in\Me_d}\mu(H^2+t)$. Using Theorem~\ref{thm:structure}
+cancellation in ``polynomial M\"obius sums'' such as $\sum_{|f|\le X}\mu(f^2+T)$. In odd characteristic this was
+achieved in their later work \cite{SS2}, for $q$ large in terms of $p$; both papers assume $p$ odd, and
+characteristic $2$ is left open there. Here we treat the sums $\sum_{H\in\Me_d}\mu(H^2+at)$ over $\Fq$, $q=2^k$. Using Theorem~\ref{thm:structure}
 to fiber $\Me_d$ into the $q^{d-2}$ affine planes $H_f+\Pe_{\le 1}$, we obtain full $1/q$ cancellation for every
 $d\ge 3$, together with exact closed formulas for $d\le 6$:
 
@@ -453,9 +459,11 @@ Suppose $\Theta_{c^*}\ne 0$ for some $c^*\in A$. Since $\deg\Theta_{c^*}\le 2d-1
 $(b_0,b_1)\in\Fq^2$ with $\Theta_{c^*}(b_0,b_1)=0$, contributing at most $(2d-1)q^2$ in total. For each $(b_0,b_1)$
 with $\Theta_{c^*}(b_0,b_1)\ne 0$, if $|A|=1$ ($A=\{a_1\}$), the inner sum over $a\ne a_1$ equals $-1$, which gives the
 exact formula of (a) as in the proof of Theorem~\ref{thm:mobius-I2}. For the bound in that case: if $n\ge 6$, then
-by Theorem~\ref{thm:structure}, $\Theta_{a_1}$ is a sum of translates of $\tau_f$ and is therefore bi-affine ($d$ odd)
-or $\Ftwo$-affine ($d$ even) of the same shape, so $|N(\Theta_{a_1})-q|\le q$ by the case analysis in the proof of
-Theorem~\ref{thm:mobius-I2}; if $n=4$, then $\Theta_{a_1}(B_1)=\sum_i(B_1+\beta_{i,1})^3$ is a nonzero polynomial of
+$\Theta_{a_1}$ is a sum of $r'\le r$ translates of $\tau_f$. If $r'$ is odd, Theorem~\ref{thm:structure} shows that
+$\Theta_{a_1}$ has the same shape as $\tau_f$ (the coefficient of $B_0B_1$ is $1$ for $d$ odd, and the additive part
+is unchanged for $d$ even), so $|N(\Theta_{a_1})-q|\le q$ by the case analysis in the proof of
+Theorem~\ref{thm:mobius-I2}. If $r'$ is even, then $\Theta_{a_1}$ is a nonzero polynomial of degree at most $1$ for
+$d$ odd, and a nonzero constant for $d$ even, so $N(\Theta_{a_1})\in\{0,q\}$ and again $|N(\Theta_{a_1})-q|\le q$; if $n=4$, then $\Theta_{a_1}(B_1)=\sum_i(B_1+\beta_{i,1})^3$ is a nonzero polynomial of
 degree at most $3$ in $B_1$ alone, so $0\le N(\Theta_{a_1})\le 3q$ and $|\mathcal{C}_f|\le 2q^2$. If $|A|\ge 2$, the rational function
 $p(a)=\sum_{c\in A}\frac{\Theta_c(b_0,b_1)}{a+c}$ has simple poles at those $c\in A$ with $\Theta_c(b_0,b_1)\ne 0$ (at
 least one, at $c^*$, and at most $|A|$); by the Perel'muter--Weil bound \cite[Theorem~3.1]{Carmon}, the Artin--Schreier
@@ -566,7 +574,8 @@ Schwartz--Zippel bound it has at most $(d-1)q^{(d-2)-1}=(d-1)q^{d-3}$ zeros in $
 \end{proof}
 
 \subsection*{Data and code}
-All theorems of this paper, including every case of the closed formulas, were checked independently by direct
+The scripts are available at \url{https://github.com/Ruqing1963/char2-mobius-chowla} and are archived at DOI
+10.5281/zenodo.24267751. All theorems of this paper, including every case of the closed formulas, were checked independently by direct
 factorisation of polynomials over $\mathbb{F}_{2^k}$ with the pure-Python scripts \texttt{code/verify\_mobius\_chowla.py}
 (exhaustive checks) and \texttt{code/extra\_checks.py} (supplementary checks: the parity law, the case splits of
 Theorems~\ref{thm:mobius-I2} and~\ref{thm:chowla}, the closed forms for $d\le6$ in Theorem~\ref{thm:poly-mobius},
@@ -594,6 +603,9 @@ $\Fq[x]$}, Amer. J. Math. \textbf{142} (2020), 1929--1953.
 
 \bibitem{SS} W. Sawin and M. Shusterman, \emph{On the Chowla and twin primes conjectures over $\Fq[T]$}, Ann. of Math.
 (2) \textbf{196} (2022), 457--506.
+
+\bibitem{SS2} W. Sawin and M. Shusterman, \emph{M\"obius cancellation on polynomial sequences and the quadratic
+Bateman--Horn conjecture over function fields}, Invent. Math. \textbf{229} (2022), 751--927.
 
 \bibitem{Swan} R. G. Swan, \emph{Factorization of polynomials over finite fields}, Pacific J. Math. \textbf{12} (1962),
 1099--1106.
