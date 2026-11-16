@@ -525,6 +525,33 @@ having different linear coefficients ($|A|=2$), which cancel; the dashed line is
 Theorem~\ref{thm:chowla}(a). For $f=t^6$ and the shifts $0,t$ the value is exactly $q(q-2)$.}\label{fig:chowla}
 \end{figure}
 
+\begin{remark}[all-or-nothing cancellation for $d$ even]\label{rem:allornothing}
+For $n=4e\ge8$ the bound of Theorem~\ref{thm:chowla}(a) can usually be replaced by an exact evaluation, without
+the Weil bound. Write $\tau_f(x)=L(x)+T_{0,0}(f)$ with $L$ additive, as in the proof of
+Theorem~\ref{thm:chowla}(d), and put $r_c=\#\{i:a_i=c\}$, $A_{\mathrm{odd}}=\{c\in A:r_c\text{ odd}\}$,
+$m=|A_{\mathrm{odd}}|$. Then $\Theta_c(x)=r_cL(x)+\Theta_c(0)$, and summing over $x=(b_0,b_1)$ first gives, with
+$\psi(a)=\sum_{c\in A_{\mathrm{odd}}}(a+c)^{-1}$ and $\kappa(a)=\sum_{c\in A}\Theta_c(0)/(a+c)$,
+\[
+\mathcal C_f(\alpha_1,\dots,\alpha_r)=(-1)^{rk\epsilon_d}\sum_{a\in\Fq\setminus A}\chi\bigl(\kappa(a)\bigr)
+\sum_{x\in\Fq^2}\chi\bigl(\psi(a)L(x)\bigr).
+\]
+As in the proof of Theorem~\ref{thm:poly-mobius}(c), the inner sum is $q^2$ if $\psi(a)T_{0,1}=0$ and
+$\psi(a)^2T_1^2=\psi(a)h_{d-1}$, and $0$ otherwise. Now $\psi=P'/P$ with $P(a)=\prod_{c\in A_{\mathrm{odd}}}(a+c)$,
+and $P'\ne0$ is a square in $\Fq[a]$, so $\psi$ has at most $\lfloor(m-1)/2\rfloor$ zeros, while $\psi(a)=\lambda$
+has at most $m$ solutions for $\lambda\ne0$. Hence, for $m\ge1$:
+\begin{enumerate}
+\item[(i)] if $T_{0,1}\ne0$, or if exactly one of $T_1,h_{d-1}$ is nonzero, only the zeros of $\psi$ contribute, and
+$|\mathcal C_f|\le\lfloor(m-1)/2\rfloor\,q^2$; in particular $\mathcal C_f=0$ whenever $m\le2$, for instance for
+every $2$-point sum with $a_1\ne a_2$, where $\psi(a)=(a_1+a_2)/((a+a_1)(a+a_2))$ has no zero;
+\item[(ii)] if $T_{0,1}=0$ and $T_1h_{d-1}\ne0$, the solutions of $\psi(a)=h_{d-1}/T_1^2$ contribute as well, and
+$|\mathcal C_f|\le\bigl(m+\lfloor(m-1)/2\rfloor\bigr)q^2$.
+\end{enumerate}
+So for $d$ even a term of size $q^{5/2}$ can occur only if $\tau_f$ is constant or $A_{\mathrm{odd}}=\emptyset$,
+when the sum over $x$ gives no cancellation and $\mathcal C_f=(-1)^{rk\epsilon_d}q^2\sum_{a\notin A}\chi(\kappa(a))$.
+This is why the cancelling examples with $|A|=2$ in Figure~\ref{fig:chowla} are taken from $d$ odd ($n=6,10$): for
+$d$ even such sums vanish identically in case (i).
+\end{remark}
+
 \section{Polynomial M\"obius sums: proof of
 \texorpdfstring{Theorem~\ref{thm:poly-mobius}}{Theorem 1.4}}\label{sec:poly}
 
@@ -619,7 +646,7 @@ All theorems of this paper, including every case of the closed formulas, were ch
 factorisation of polynomials over $\mathbb{F}_{2^k}$, with two pure-Python scripts in the directory \texttt{code}:
 \texttt{verify\_mobius\_chowla.py} (exhaustive checks) and \texttt{extra\_checks.py} (supplementary checks: the parity law, the case splits of
 Theorems~\ref{thm:mobius-I2} and~\ref{thm:chowla}, the closed forms for $d\le6$ in Theorem~\ref{thm:poly-mobius},
-Proposition~\ref{prop:sporadic} and Remark~\ref{rem:n16}). Neither script uses third-party packages. The figures are produced by \texttt{make\_figures.py} (which needs
+Proposition~\ref{prop:sporadic}, Remark~\ref{rem:n16} and Remark~\ref{rem:allornothing}). Neither script uses third-party packages. The figures are produced by \texttt{make\_figures.py} (which needs
 \texttt{numpy} and \texttt{matplotlib}).
 
 \begin{thebibliography}{99}

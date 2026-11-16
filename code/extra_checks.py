@@ -375,5 +375,67 @@ for k, ms, trials in [(2, [2, 3], 120), (3, [2, 3, 4], 80), (4, [2, 3, 4, 5], 60
                             check(tau_direct(H, F) == 0, f"Prop2.1 rigid but tau!=0 q={q} Hf={Hf}")
         print(f"    q={q} n={8*m}: {trials} random (U_f, W_0), {nrig} rigid")
 
+# ---- 11. Remark 3.2: d even, exact evaluation of Chowla sums by summing over (b0, b1) first
+print("[11] Remark 3.2 (d even): C_f = sgn q^2 sum_{a: psi T01 = 0, psi^2 T1^2 = psi h} chi(kappa(a)); bounds")
+random.seed(4)
+for k, ds, trials in [(2, [4, 6], 150), (3, [4, 6], 120), (4, [4], 40)]:
+    F = GF2k(k); q = F.q
+    for d in ds:
+        ncase = [0, 0, 0]; nzero2 = 0
+        for trial in range(trials):
+            Hf = [0,0] + [random.randrange(q) for _ in range(d-2)] + [1]
+            if trial % 3 == 0:                  # force T01 = 0 fairly often (h_{d-1} = 0, small U_f)
+                for j in range(3, d, 2): Hf[j] = 0
+                Hf[3] = random.randrange(q)
+            tau = [[0]*q for _ in range(q)]
+            for b0 in range(q):
+                for b1 in range(q):
+                    H = list(Hf); H[0], H[1] = b0, b1
+                    tau[b0][b1] = tau_direct(H, F)
+            T00 = tau[0][0]; T01 = tau[1][0] ^ T00; hd = Hf[d-1]; T1 = tau[0][1] ^ T00 ^ hd
+            r = random.choice([2, 2, 3, 4, 5])
+            shifts = random.sample(list(itertools.product(range(q), repeat=3)), r)   # (beta0, beta1, a_i)
+            A = sorted(set(s_[2] for s_ in shifts))
+            rc = {c: sum(1 for s_ in shifts if s_[2] == c) for c in A}
+            Aodd = [c for c in A if rc[c] % 2]
+            Th0 = {c: 0 for c in A}
+            for (be0, be1, ai) in shifts: Th0[ai] ^= tau[be0][be1]
+            S = (-1)**r if (k*eps(d)) & 1 else 1
+            C = 0
+            for a in range(q):
+                if a in A: continue
+                for b0 in range(q):
+                    for b1 in range(q):
+                        v = 0
+                        for (be0, be1, ai) in shifts:
+                            v ^= F.div(tau[b0 ^ be0][b1 ^ be1], a ^ ai)
+                        C += F.chi(v)
+            C *= S
+            pred = 0; ncontrib = 0
+            for a in range(q):
+                if a in A: continue
+                psi = 0; kap = 0
+                for c in Aodd: psi ^= F.div(1, a ^ c)
+                for c in A: kap ^= F.div(Th0[c], a ^ c)
+                if F.mul(psi, T01) == 0 and F.mul(F.sq(psi), F.sq(T1)) == F.mul(psi, hd):
+                    pred += F.chi(kap); ncontrib += 1
+            pred *= S*q*q
+            tag = f"k={k} d={d} Hf={Hf} shifts={shifts}"
+            check(C == pred, f"Rem3.2 formula {tag}: C={C} pred={pred}")
+            m = len(Aodd)
+            if m >= 1:
+                if T01 != 0 or ((T1 != 0) != (hd != 0)):
+                    ncase[0] += 1
+                    check(abs(C) <= ((m-1)//2)*q*q, f"Rem3.2 bound (i) {tag}: C={C}")
+                    if r == 2 and len(A) == 2:
+                        nzero2 += 1; check(C == 0, f"Rem3.2 2-point {tag}: C={C}")
+                elif T1 != 0 and hd != 0:
+                    ncase[1] += 1
+                    check(abs(C) <= (m + (m-1)//2)*q*q, f"Rem3.2 bound (ii) {tag}: C={C}")
+                else:
+                    ncase[2] += 1
+        print(f"    q={q} n={2*d}: {trials} random (f, shifts); cases (i)/(ii)/const = {ncase}, "
+              f"{nzero2} two-point sums with a_1 != a_2 all 0")
+
 print("\nFAILURES:" if fails else "\nALL EXTRA CHECKS PASSED")
 for f in fails[:30]: print("  -", f)
