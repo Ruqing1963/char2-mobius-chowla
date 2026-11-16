@@ -39,11 +39,11 @@ discriminant, polynomial M\"obius sums}
 Let $q=2^k$ and let $I_2(f)=f+\Pe_{\le 2}$ be a short interval around a monic polynomial $f\in\Fq[t]$ of degree
 $n=2d\ge 4$ with $\deg f'\le 1$. In a previous paper we proved that every $F=H^2+at\in I_2(f)$ ($a\ne 0$) satisfies
 $r(F)\equiv k\epsilon_d+\Tr_{\Fq/\Ftwo}(\tau(H)/a)\pmod 2$, where $\tau(H)=\sum_{H(\beta)=0}\beta H'(\beta)^2$. Here we
-show that the restriction $\tau_f(B_0,B_1)=\tau(H_f+B_1t+B_0)$ is always bilinear of the form
+show that the restriction $\tau_f(B_0,B_1)=\tau(H_f+B_1t+B_0)$ is always bi-affine of the form
 $(B_0+c_0)(B_1+c_1)+\Delta$ when $d$ is odd; when $d$ is even it is $\Ftwo$-affine of the form
 $T_{0,1}B_0+T_1B_1+h_{d-1}B_1^2+T_{0,0}$, by the previous paper. This yields four applications:
-(1)~For every $f$ with $\deg f'\le 1$, the short-interval M\"obius sum $\sum_{F\in I_2(f)}\mu(F)$ takes only the five
-exact values $0$, $\pm q$, $\pm q(q-1)$, $\pm q^2$, $\pm q^2(q-1)$; in particular it is $O(q^2)$ whenever $\tau_f\ne 0$,
+(1)~For every $f$ with $\deg f'\le 1$, the short-interval M\"obius sum $\sum_{F\in I_2(f)}\mu(F)$ takes values in the
+set $\{0,\pm q,\pm q(q-1),\pm q^2,\pm q^2(q-1)\}$; in particular it is $O(q^2)$ whenever $\tau_f\ne 0$,
 saving a factor $q^{1/2}$ over the Riemann Hypothesis bound; on the very short intervals $f+\Fq$ and $f+\Pe_{\le 1}$
 it obeys an exact dichotomy and trichotomy.
 (2)~For the $r$-point Chowla correlation on $I_2(f)$, we give an exact dichotomy between $O_{n,r}(q^{5/2})$ cancellation
@@ -116,10 +116,10 @@ U_f(u)=\sum_{\substack{3\le j\le d-1\\ j\text{ odd}}}h_j u^{(j-1)/2},\qquad
 V_f(u)=\sum_{\substack{2\le j\le d\\ j\text{ even}}}h_j u^{j/2}\quad(h_d=1).
 \]
 
-\begin{theorem}[bilinear and $\Ftwo$-affine structure of $\tau_f$]\label{thm:structure}
+\begin{theorem}[bi-affine and $\Ftwo$-affine structure of $\tau_f$]\label{thm:structure}
 Let $q=2^k$, $n=2d\ge 4$, and let $f\in\Fq[t]$ be monic of degree $n$ with $\deg f'\le 1$.
 \begin{enumerate}
-\item[(a)] If $d=2e+1\ge 3$ is odd ($n\equiv 2\pmod 4$), then $\tau_f(B_0,B_1)$ is bilinear in $(B_0,B_1)$:
+\item[(a)] If $d=2e+1\ge 3$ is odd ($n\equiv 2\pmod 4$), then $\tau_f(B_0,B_1)$ is bi-affine in $(B_0,B_1)$, that is, a translated bilinear form plus a constant:
 \begin{equation}\label{eq:tau-odd}
 \tau_f(B_0,B_1)=(B_0+c_0(f))(B_1+c_1(f))+\Delta(f),
 \end{equation}
@@ -237,7 +237,8 @@ If $|A|=1$ (all shifts have the same linear coefficient $a_1$) and $\Theta_{a_1}
 \item[(c)] (\emph{Failure of $2$-point Chowla cancellation on $S_n$-intervals.}) Suppose $n=4$, or $n=4e\ge 8$ with
 $T_{0,1}(f)=0$ and $\tau_f\ne 0$ (which holds in particular whenever $\deg U_f\le\frac{2e-2}{3}$ and $\tau_f\ne 0$,
 and unconditionally for every $n=8m+4\ge 12$, $e=2m+1$, with $\deg U_f=m$, where $T_{0,1}(f)=h_{d-1}=0$ and
-$T_1(f)=h_{2m+1}^2\ne 0$). Then the geometric Galois group over $I_2(f)$ is $S_n$ and
+$T_1(f)=h_{2m+1}^2\ne 0$). Then the geometric Galois group of $f+A_2t^2+A_1t+A_0$ over
+$\overline{\mathbb F}_q(A_0,A_1,A_2)$ is $S_n$ and
 $\bigl|\sum_{F\in I_2(f)}\mu(F)\bigr|\le q^2$ (equal to $0$ when $n=4$ or exactly one of $T_1(f),h_{d-1}$ is nonzero,
 and to $-(-1)^{k\epsilon_d}q^2$ when $T_1(f)=h_{d-1}=0$), yet $\mu(F+c_0)=\mu(F)$ for every
 $F\in I_2(f)$ and every constant $c_0\in\Fq$, and for any distinct $c_1,c_2\in\Fq$ the $2$-point Chowla sum satisfies
@@ -313,8 +314,14 @@ $B_0^rB_1^m$ in the $i$-th summand has $u$-degree at most
 \]
 If $r+m\ge 2$, then $(2-r-m)e-i-1\le -i-1\le -2$ for all $i\ge 1$, so no monomial $B_0^rB_1^m$ with $r+m\ge 2$
 contributes to $[u^{-1}]$ for $i\ge 1$. Thus $\tau_f(B_0,B_1)=B_0B_1+c_1(f)B_0+c_0(f)B_1+c_{00}(f)$. Since
-$\binom{2i+1}{1}\equiv\binom{-2i+1}{1}\equiv 1\pmod 2$, the coefficients of $B_0^1B_1^0$ and $B_0^0B_1^1$ sum over
-$i\ge 1$ to the stated rational expressions for $c_1(f)$ and $c_0(f)$, and setting $B_0=B_1=0$ gives $c_{00}(f)$.
+$\binom{2i+1}{1}\equiv\binom{-2i+1}{1}\equiv 1\pmod 2$, with $x=V_f^2/(uU_f^2)$ the coefficient of $B_0$ in the
+$i$-th summand is $V_f^{2i}/(u^{i+1}U_f^{2i-1})=(U_f/u)x^i$, and that of $B_1$ is
+$V_f^{2i+1}/(u^{i+1}U_f^{2i})=(V_f/u)x^i$. Summing $\sum_{i\ge1}x^i=x/(1+x)=V_f^2/(uU_f^2+V_f^2)$ gives
+\[
+c_1(f)=[u^{-1}]\frac{U_fV_f^2}{u(uU_f^2+V_f^2)},\qquad c_0(f)=[u^{-1}]\frac{V_f^3}{u(uU_f^2+V_f^2)},
+\]
+which are the stated formulas: $c_1$ is the coefficient of $B_0$ and $c_0$ that of $B_1$. Setting $B_0=B_1=0$ gives
+$c_{00}(f)$.
 
 (b) This is \cite[Theorem~3.2(b)]{ChenShort}: with $G_0=V_f^2+uU_f^2$, monic of degree $2e$, one expands
 $1/(G_0+B_0^2+uB_1^2)$ in powers of $(B_0^2+uB_1^2)/G_0$ and checks by degree that only the four displayed terms reach
@@ -339,9 +346,10 @@ $T_{0,0}(f)=\lambda^2\,[u^{-1}]\,U_fR/G_0$, where $G_0=V_f^2+uU_f^2$.
 \item[(b)] If $\deg W_0\le m-1$, then $T_{0,0}(f)=\lambda^3w_{m-1}$. In particular $I_2(f)$ is rigid whenever
 $\deg W_0\le m-2$; for $W_0=0$ this is \cite[Proposition~3.3]{ChenShort}.
 \end{enumerate}
-Thus, in the $2m$-dimensional family of the $f$ with $\deg U_f=m$ and $\deg(V_f+\lambda^{-2}U_f^2)\le m$, the
-rigid intervals form the hypersurface $T_{0,0}(f)=0$, which contains the linear subfamily $w_{m-1}=w_m=0$ and is
-not the whole family.
+The family is parametrised by $\lambda\in\Fq^\times$, the $m-1$ lower coefficients of $U_f$ and the $m$
+coefficients $w_1,\dots,w_m$ of $W_0$, an open subset of affine $2m$-space. In it the rigid intervals form the
+hypersurface $\mathcal R_m=\{T_{0,0}(f)=0\}$, defined by a nonzero polynomial equation; $\mathcal R_m$ contains the
+linear subfamily $w_{m-1}=w_m=0$, of dimension $2m-2$. We do not claim that $\mathcal R_m$ is irreducible.
 \end{proposition}
 
 \begin{proof}
@@ -370,7 +378,9 @@ $T_{0,1}(f)=0$, $T_1(f)=\lambda^2h_6$ and
 $T_{0,0}(f)|_{h_6=0}=\lambda^3(h_2+\lambda^2)+h_3(\lambda^2h_4+h_3^2)$. Hence the rigid intervals with $\deg U_f=2$
 are exactly those with $h_7=h_6=0$ and $h_2=\lambda^2+\lambda^{-3}h_3(\lambda^2h_4+h_3^2)$, giving $(q-1)q^2$ rigid
 polynomials $f$: this is the sporadic component of \cite[Table~1]{ChenShort}, and \cite[Proposition~3.3]{ChenShort}
-is its subfamily $h_4=\lambda^{-2}h_3^2$.
+is its subfamily $h_4=\lambda^{-2}h_3^2$. None of these intervals lies in the previously known rigid families:
+the main family of \cite[Theorem~3.2(c)]{ChenShort} requires $3\deg U_f\le e-2=2$, and the affine intervals
+require $U_f=0$, whereas here $\deg U_f=2$.
 
 Indeed, $U_f=\lambda u^2+h_3u$, $V_f=u^4+h_6u^3+h_4u^2+h_2u$ and
 $G_0=u^8+h_6^2u^6+\lambda^2u^5+h_4^2u^4+h_3^2u^3+h_2^2u^2$; $h_7=0$ and $T_{0,1}(f)=0$ because
@@ -443,7 +453,7 @@ Suppose $\Theta_{c^*}\ne 0$ for some $c^*\in A$. Since $\deg\Theta_{c^*}\le 2d-1
 $(b_0,b_1)\in\Fq^2$ with $\Theta_{c^*}(b_0,b_1)=0$, contributing at most $(2d-1)q^2$ in total. For each $(b_0,b_1)$
 with $\Theta_{c^*}(b_0,b_1)\ne 0$, if $|A|=1$ ($A=\{a_1\}$), the inner sum over $a\ne a_1$ equals $-1$, which gives the
 exact formula of (a) as in the proof of Theorem~\ref{thm:mobius-I2}. For the bound in that case: if $n\ge 6$, then
-by Theorem~\ref{thm:structure}, $\Theta_{a_1}$ is a sum of translates of $\tau_f$ and is therefore bilinear ($d$ odd)
+by Theorem~\ref{thm:structure}, $\Theta_{a_1}$ is a sum of translates of $\tau_f$ and is therefore bi-affine ($d$ odd)
 or $\Ftwo$-affine ($d$ even) of the same shape, so $|N(\Theta_{a_1})-q|\le q$ by the case analysis in the proof of
 Theorem~\ref{thm:mobius-I2}; if $n=4$, then $\Theta_{a_1}(B_1)=\sum_i(B_1+\beta_{i,1})^3$ is a nonzero polynomial of
 degree at most $3$ in $B_1$ alone, so $0\le N(\Theta_{a_1})\le 3q$ and $|\mathcal{C}_f|\le 2q^2$. If $|A|\ge 2$, the rational function
@@ -458,7 +468,11 @@ $T_{0,1}(f)=[u^{-1}]\frac{U_f^3}{V_f^2+uU_f^2}=0$. If moreover $e=2m+1\ge 3$ and
 $\lambda=h_{2m+1}\ne 0$, then $G_0=V_f^2+uU_f^2$ is monic of degree $2e$ and $\deg_u(U_f^2V_f)=2m+e=2e-1=\deg_uG_0-1$,
 so $T_1(f)=[u^{-1}]\frac{U_f^2V_f}{G_0}=\lambda^2\ne 0$; also $h_{d-1}=0$ since $\deg U_f=m<2m=e-1$, and
 $\deg_u(U_f^3)=3m\le 2e-2$ gives $T_{0,1}(f)=0$. In particular $\tau_f\ne 0$ and, by Theorem~\ref{thm:mobius-I2}(c),
-$\sum_{F\in I_2(f)}\mu(F)=0$. In all cases with $T_{0,1}(f)=0$, Theorem~\ref{thm:structure}(b) gives
+$\sum_{F\in I_2(f)}\mu(F)=0$. In every case of (c) we have $\tau_f\ne0$ (for $n=4$, $\tau_f=B_1^3$), so the
+geometric Galois group of $f+A_2t^2+A_1t+A_0$ over $\overline{\mathbb F}_q(A_0,A_1,A_2)$ is $S_n$ by
+\cite[Theorem~1.2(b) and Theorem~4.3]{ChenShort}, which require only $\deg f'\le1$, $n\ge4$ and $\tau_f\ne0$; the
+remaining bounds on $\sum\mu(F)$ are Theorem~\ref{thm:mobius-I2}(a),(c). In all cases with $T_{0,1}(f)=0$,
+Theorem~\ref{thm:structure}(b) gives
 $\tau_f(B_0+b_0,B_1)=\tau_f(B_0,B_1)$, so $\mu(F+b_0^2)=\mu(F)$ for all $b_0\in\Fq$ and
 part (b) applies to $\alpha_1=c_1$, $\alpha_2=c_2$ with $|A|=1$ and $\Theta_0=0$.
 
@@ -466,7 +480,10 @@ For (d), by \eqref{eq:tau-even} we have $\tau_f(x)=L(x)+T_{0,0}(f)$ for $x=(B_0,
 $L(B_0,B_1)=T_{0,1}(f)B_0+T_1(f)B_1+h_{d-1}B_1^2$ is additive. Writing $\beta_i=(\beta_{i,0},\beta_{i,1})$, the
 condition $\sum_i\alpha_i=0$ reads $(\sum_i\beta_{i,1})^2t^2+4c\,t+(\sum_i\beta_{i,0})^2=0$, i.e.\ $\sum_i\beta_i=0$.
 Hence $\Theta_c(x)=\sum_{i=1}^4\bigl(L(x)+L(\beta_i)+T_{0,0}(f)\bigr)=L\bigl(\sum_i\beta_i\bigr)=0$, and part (b)
-with $r=4$, $|A|=1$ gives $q^2(q-1)$.
+with $r=4$, $|A|=1$ gives $q^2(q-1)$. Geometrically: on a plane $H_f+\Pe_{\le1}$ with $d$ even, $\chi(\tau_f/a)$ is
+$\chi(T_{0,0}/a)$ times a character of the additive group $\Fq^2$ (because $\Tr(L(x)/a)$ is $\Ftwo$-linear in $x$),
+and every character takes product $1$ on the four vertices of an $\Ftwo$-affine plane. So the four factors
+$\mu(F+\alpha_i)$ multiply to $1$ for every $F=H^2+at$ with $a\ne c$, and vanish for $a=c$.
 \end{proof}
 
 \section{Polynomial M\"obius sums: proof of
@@ -498,7 +515,9 @@ Theorem~\ref{thm:structure}(a) gives
 \[
 c_1=h_4^2(h_4^2+h_3),\qquad c_0=h_4^2(h_4^3+h_2),\qquad c_{00}=c_0c_1+h_2^3+h_2^2h_3h_4+h_2h_3^2h_4^2+h_3^3h_4^3,
 \]
-so $\Delta(h_2,h_3,h_4)=(h_2+h_3h_4)^3$. Substituting $h_2\mapsto h_2+h_3h_4$ in (b) gives
+so $\Delta=c_{00}+c_0c_1=h_2^3+h_2^2(h_3h_4)+h_2(h_3h_4)^2+(h_3h_4)^3=(h_2+h_3h_4)^3$, since
+$(x+y)^3=x^3+x^2y+xy^2+y^3$ in characteristic $2$. For fixed $(h_3,h_4)$ the substitution $h_2\mapsto h_2+h_3h_4$
+is a bijection of $\Fq$, so $\sum_{h_2}\chi(\Delta/a)=\sum_{b}\chi(b^3/a)=S_3(a)$, and (b) gives
 $\sum_{H\in\Me_5}\mu(H^2+at)=q\cdot q^2S_3(a)$.
 
 For $d=2e\ge 4$ even, substituting \eqref{eq:tau-even} into \eqref{eq:poly-fiber} and using $\Tr(x^2)=\Tr(x)$, the
@@ -520,8 +539,18 @@ T_{0,1}=h_5^2(h_3+h_5^3),\qquad T_1=h_3^2+h_5^2\bigl(h_2+h_4h_5^2+h_4^2+h_5^4\bi
 The conditions $T_{0,1}=0$, $T_1^2=ah_5$ in (c) have two kinds of solutions. If $h_5=0$, then $T_1=h_3^2$ forces
 $h_3=0$, so $U_f=0$ and $T_{0,0}=0$: this gives $q^2$ tuples $(h_2,h_4)$, each contributing $\chi(0)=1$. If
 $h_5=c\ne 0$, then $h_3=c^3$ and $T_1=c^2w$ with $w=h_2+h_4c^2+h_4^2$, and $T_1^2=ac$ means $w^2=a/c^3$; this
-determines $h_2$ uniquely, giving $q(q-1)$ tuples $(c,h_4)$. On this locus a direct expansion gives
-$T_{0,0}=c^3\bigl(w^2+yw+y^2\bigr)$ with $y=c^4+h_4^2$, so $T_{0,0}/a=1+(y/w)+(y/w)^2$ and
+determines $h_2$ uniquely, giving $q(q-1)$ tuples $(c,h_4)$. On this locus $U_f=cu^2+c^3u$ and
+$G_0=u^6(1+c^2u^{-1}+h_4^2u^{-2}+c^6u^{-3}+h_2^2u^{-4})$, so $1/G_0=u^{-6}\sum_{i\ge0}s_iu^{-i}$ with
+\[
+s_1=c^2,\quad s_2=c^4+h_4^2,\quad s_3=0,\quad s_4=c^8+c^4h_4^2+h_4^4+h_2^2,
+\]
+and $U_f^3V_f=\sum_jN_ju^j$ has $N_9=c^3$, $N_8=c^3(c^2+h_4)$, $N_7=c^3(c^4+c^2h_4+h_2)$,
+$N_6=c^5(c^4+c^2h_4+h_2)$, $N_5=c^7(c^2h_4+h_2)$. Hence
+\[
+T_{0,0}=\sum_{i=0}^4N_{5+i}s_i
+=c^3\bigl(c^8+c^6h_4+c^4h_2+c^2h_4^3+h_4^4+h_2h_4^2+h_2^2\bigr)=c^3\bigl(w^2+yw+y^2\bigr),
+\]
+with $y=c^4+h_4^2$. As $a=c^3w^2$ and $w\ne0$, $T_{0,0}/a=1+(y/w)+(y/w)^2$ and
 $\chi(T_{0,0}/a)=\chi(1)=(-1)^k$. Therefore
 $\sum_{H\in\Me_6}\mu(H^2+at)=(-1)^kq^2\bigl(q^2+(-1)^kq(q-1)\bigr)=(-1)^kq^4+q^3(q-1)$.
 In particular, for $k$ odd the terms of order $q^4$ cancel and $\sum_{H\in\Me_6}\mu(H^2+at)=-q^3$.
@@ -532,8 +561,8 @@ $d-1$ in $(h_2,\dots,h_{d-1})$. At $h_2=\dots=h_{d-2}=0$, we have $U_f(u)=h_{d-1
 T_{0,1}(0,\dots,0,h_{d-1})=[u^{-1}]\frac{h_{d-1}^3u^{3e-3}}{u^{2e}+h_{d-1}^2u^{2e-1}}
 =[u^{-1}]\sum_{j\ge 0}h_{d-1}^{2j+3}u^{e-3-j}=h_{d-1}^{2e-1}=h_{d-1}^{d-1}.
 \]
-Thus $T_{0,1}$ is a nonzero polynomial of degree $d-1$ in $\Fq[h_2,\dots,h_{d-1}]$, so it has at most $(d-1)q^{d-3}$
-zeros in $\Fq^{d-2}$. Multiplying by $q^2$ gives the bound $(d-1)q^{d-1}$.
+Thus $T_{0,1}$ is a nonzero polynomial of total degree $d-1$ in the $d-2$ variables $h_2,\dots,h_{d-1}$, so by the
+Schwartz--Zippel bound it has at most $(d-1)q^{(d-2)-1}=(d-1)q^{d-3}$ zeros in $\Fq^{d-2}$. Multiplying by $q^2$ gives the bound $(d-1)q^{d-1}$.
 \end{proof}
 
 \subsection*{Data and code}

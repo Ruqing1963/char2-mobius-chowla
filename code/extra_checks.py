@@ -317,6 +317,10 @@ for k in [1, 2, 3]:
         check(T01 == F.mul(F.sq(h5), h3 ^ F.pow(h5, 3)), f"d=6 T01 q={q} h={(h2,h3,h4,h5)}")
         check(T1 == F.sq(h3) ^ F.mul(h2, F.sq(h5)) ^ F.mul(h4, F.pow(h5, 4))
               ^ F.mul(F.sq(h4), F.sq(h5)) ^ F.pow(h5, 6), f"d=6 T1 q={q} h={(h2,h3,h4,h5)}")
+        if h5 and h3 == F.pow(h5, 3):   # locus of the d=6 proof: T00 = c^3 (w^2 + y w + y^2)
+            c = h5; w = h2 ^ F.mul(h4, F.sq(c)) ^ F.sq(h4); y = F.pow(c, 4) ^ F.sq(h4)
+            check(T00 == F.mul(F.pow(c, 3), F.sq(w) ^ F.mul(y, w) ^ F.sq(y)),
+                  f"d=6 T00 on locus q={q} h={(h2,h3,h4,h5)}")
     for a in range(1, q):
         cub = sum(F.chi(F.div(F.pow(b, 3), a)) for b in range(q))
         pred5 = q**3 * cub
