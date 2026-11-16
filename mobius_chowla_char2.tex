@@ -4,6 +4,8 @@
 \usepackage{lmodern}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{booktabs}
+\usepackage{graphicx}
+\graphicspath{{figures/}}
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{xcolor}
 \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
@@ -209,6 +211,22 @@ and $I_1(f)=f+\Pe_{\le 1}$,
 \]
 \end{enumerate}
 \end{theorem}
+
+Figure~\ref{fig:planes} shows the four typical shapes of the zero locus of $\tau_f$ on a plane $H_f+\Pe_{\le1}$, and
+the resulting pattern of M\"obius values.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{fig_planes.pdf}
+\caption{The plane $H_f+b_1t+b_0$ over $\mathbb{F}_{16}=\Ftwo[\omega]/(\omega^4+\omega+1)$; an element is labelled by
+the integer whose binary digits are its coordinates in the basis $1,\omega,\omega^2,\omega^3$. Top: the zero locus
+of $\tau_f$, with $N(\tau_f)$ and the sum of $\mu$ over $I_2(f)$ given by \eqref{eq:mobius-master}. For $d$ odd it
+is a pair of lines ($\Delta=0$) or a hyperbola ($\Delta\ne0$); for $d$ even it is an $\Ftwo$-affine subspace, here
+the graph of an $\Ftwo$-affine map ($T_{0,1}\ne0$) and a union of two lines $b_1=\mathrm{const}$ ($T_{0,1}=0$,
+$T_1h_{d-1}\ne0$). Bottom: $\mu(H^2+\omega t)$ on the same planes. For $d$ even it is, up to sign, an additive
+character of $\mathbb{F}_{16}^2$, and for $T_{0,1}=0$ it does not depend on $b_0$
+(Theorem~\ref{thm:chowla}(c)).}\label{fig:planes}
+\end{figure}
 
 Our second application treats $r$-point Chowla correlation sums on $I_2(f)$, extending Carmon's $n=2$ trichotomy
 \cite[Proposition~5.1]{Carmon} to all even degrees $n=2d\ge 4$ and revealing a striking contrast with Theorem~5 of
@@ -494,6 +512,19 @@ and every character takes product $1$ on the four vertices of an $\Ftwo$-affine 
 $\mu(F+\alpha_i)$ multiply to $1$ for every $F=H^2+at$ with $a\ne c$, and vanish for $a=c$.
 \end{proof}
 
+Figure~\ref{fig:chowla} illustrates the dichotomy of Theorem~\ref{thm:chowla} on four examples.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{fig_chowla.pdf}
+\caption{Normalised Chowla correlations $|\mathcal C_f|/q^3$ for $q=2^k$, $2\le k\le7$. Upper two curves (they
+coincide, with value $1-1/q$): no cancellation, for the $2$-point sum with constant shifts on $I_2(t^{12}+t^6)$,
+where $T_{0,1}=0$ and the Galois group is $S_{12}$ (Theorem~\ref{thm:chowla}(c)), and for a $4$-point parallelogram
+on $I_2(t^8+t^6)$, where $T_{0,1}\ne0$ (Theorem~\ref{thm:chowla}(d)). Lower two curves: $2$-point sums with shifts
+having different linear coefficients ($|A|=2$), which cancel; the dashed line is the bound $2q^{-1/2}$ of
+Theorem~\ref{thm:chowla}(a). For $f=t^6$ and the shifts $0,t$ the value is exactly $q(q-2)$.}\label{fig:chowla}
+\end{figure}
+
 \section{Polynomial M\"obius sums: proof of
 \texorpdfstring{Theorem~\ref{thm:poly-mobius}}{Theorem 1.4}}\label{sec:poly}
 
@@ -573,13 +604,23 @@ Thus $T_{0,1}$ is a nonzero polynomial of total degree $d-1$ in the $d-2$ variab
 Schwartz--Zippel bound it has at most $(d-1)q^{(d-2)-1}=(d-1)q^{d-3}$ zeros in $\Fq^{d-2}$. Multiplying by $q^2$ gives the bound $(d-1)q^{d-1}$.
 \end{proof}
 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.8\textwidth]{fig_polysums.pdf}
+\caption{The closed forms of Theorem~\ref{thm:poly-mobius}(a) for $a=1$: the normalised sums
+$\bigl|\sum_{H\in\Me_d}\mu(H^2+t)\bigr|/q^d$, $2\le d\le6$, for $q=2^k$, $k\le10$. Values equal to $0$ ($d=2,5$ with
+$k$ odd) are omitted. The curves for $d=3$ and $d=4$ coincide with $q^{-1}$; for $d=5$ the saving is $q^{-3/2}$;
+for $d=6$ it alternates between $q^{-3}$ ($k$ odd) and about $2q^{-2}$ ($k$ even).}\label{fig:polysums}
+\end{figure}
+
 \subsection*{Data and code}
 Code: \url{https://github.com/Ruqing1963/char2-mobius-chowla}, archived at DOI 10.5281/zenodo.24267751.
 All theorems of this paper, including every case of the closed formulas, were checked independently by direct
 factorisation of polynomials over $\mathbb{F}_{2^k}$, with two pure-Python scripts in the directory \texttt{code}:
 \texttt{verify\_mobius\_chowla.py} (exhaustive checks) and \texttt{extra\_checks.py} (supplementary checks: the parity law, the case splits of
 Theorems~\ref{thm:mobius-I2} and~\ref{thm:chowla}, the closed forms for $d\le6$ in Theorem~\ref{thm:poly-mobius},
-Proposition~\ref{prop:sporadic} and Remark~\ref{rem:n16}). Neither script uses third-party packages.
+Proposition~\ref{prop:sporadic} and Remark~\ref{rem:n16}). Neither script uses third-party packages. The figures are produced by \texttt{make\_figures.py} (which needs
+\texttt{numpy} and \texttt{matplotlib}).
 
 \begin{thebibliography}{99}
 
