@@ -1,0 +1,574 @@
+\documentclass[11pt,a4paper]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{booktabs}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+\emergencystretch=1.5em
+
+\newcommand{\Fq}{\mathbb{F}_q}
+\newcommand{\Ftwo}{\mathbb{F}_2}
+\newcommand{\Tr}{\mathrm{Tr}}
+\newcommand{\Pe}{\mathcal{P}}
+\newcommand{\Me}{\mathcal{M}}
+
+\title[M\"obius cancellation and Chowla correlations in characteristic $2$]{Short-interval M\"obius sums, Chowla
+correlations, and polynomial M\"obius sums in characteristic \texorpdfstring{$2$}{2}}
+\author{Ruqing Chen}
+\address{GUT Geoservice Inc., Montreal, Canada}
+\email{ruqing@hotmail.com}
+\date{November 2026}
+\subjclass[2020]{Primary 11T06; Secondary 11N37, 11T23, 12E20}
+\keywords{M\"obius function, Chowla conjecture, finite fields, characteristic 2, short intervals, Berlekamp
+discriminant, polynomial M\"obius sums}
+
+\begin{document}
+
+\begin{abstract}
+Let $q=2^k$ and let $I_2(f)=f+\Pe_{\le 2}$ be a short interval around a monic polynomial $f\in\Fq[t]$ of degree
+$n=2d\ge 4$ with $\deg f'\le 1$. In a previous paper we proved that every $F=H^2+at\in I_2(f)$ ($a\ne 0$) satisfies
+$r(F)\equiv k\epsilon_d+\Tr_{\Fq/\Ftwo}(\tau(H)/a)\pmod 2$, where $\tau(H)=\sum_{H(\beta)=0}\beta H'(\beta)^2$. Here we
+show that the restriction $\tau_f(B_0,B_1)=\tau(H_f+B_1t+B_0)$ is always bilinear of the form
+$(B_0+c_0)(B_1+c_1)+\Delta$ when $d$ is odd; when $d$ is even it is $\Ftwo$-affine of the form
+$T_{0,1}B_0+T_1B_1+h_{d-1}B_1^2+T_{0,0}$, by the previous paper. This yields four applications:
+(1)~For every $f$ with $\deg f'\le 1$, the short-interval M\"obius sum $\sum_{F\in I_2(f)}\mu(F)$ takes only the five
+exact values $0$, $\pm q$, $\pm q(q-1)$, $\pm q^2$, $\pm q^2(q-1)$; in particular it is $O(q^2)$ whenever $\tau_f\ne 0$,
+saving a factor $q^{1/2}$ over the Riemann Hypothesis bound; on the very short intervals $f+\Fq$ and $f+\Pe_{\le 1}$
+it obeys an exact dichotomy and trichotomy.
+(2)~For the $r$-point Chowla correlation on $I_2(f)$, we give an exact dichotomy between $O_{n,r}(q^{5/2})$ cancellation
+and full correlation $\pm q^2(q+O_r(1))$. Whenever $\tau_f\ne 0$ and $T_{0,1}(f)=0$ (which holds for $n=4$ and for
+every $n=8m+4\ge 12$ with $\deg U_f=m$, where also $\sum_{F\in I_2(f)}\mu(F)=0$), the geometric Galois group is $S_n$,
+yet $\mu(F+c_0)=\mu(F)$ for all $c_0\in\Fq$, so $2$-point Chowla sums with constant shifts have no cancellation.
+For every $n\equiv 0\pmod 4$, $n\ge 8$, and every $f$, $4$-point Chowla sums over parallelogram shifts have no
+cancellation.
+(3)~Summing over all monic $H\in\Me_d$ of degree $d$, we obtain $\bigl|\sum_{H\in\Me_d}\mu(H^2+at)\bigr|\le (d-1)q^{d-1}$
+for all $d\ge 3$ ($\le q^{d-1}$ for $d$ odd) and exact closed formulas for $d\le 6$, addressing a characteristic-$2$
+analogue of a problem of Sawin and Shusterman.
+(4)~For every $n=8m\ge 16$ we find a $2m$-parameter family of intervals on which $\tau_f$ is constant, so that the
+rigid ones form a hypersurface in it; for $n=16$ this hypersurface is the sporadic rigid component.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction and main results}\label{sec:intro}
+
+\subsection{Background}
+Let $\Fq$ be a finite field of characteristic $2$ with $q=2^k$ elements, and let $\Me_n\subset\Fq[t]$ be the set of
+monic polynomials of degree $n$. For $F\in\Fq[t]$, the M\"obius function is defined by $\mu(F)=0$ if $F$ is not
+square-free and $\mu(F)=(-1)^{r(F)}$ if $F$ is separable with $r(F)$ irreducible factors.
+
+In odd characteristic, Pellet's formula $\mu(F)=(-1)^{\deg F}\chi_2(\mathrm{disc}\,F)$ reduces M\"obius and Chowla
+correlation sums to character sums of resultants $\mathrm{Res}(F,F')$; this is the foundation of the works of Carmon and
+Rudnick \cite{CaRu} on $\Me_n$, Kurlberg and Rosenzweig \cite{KR} on very short intervals, and Sawin and Shusterman
+\cite{SS} on the Chowla and twin prime conjectures over $\Fq[t]$ for odd $q$.
+
+In characteristic $2$, Pellet's formula is replaced by Swan's theorem \cite{Swan} and Berlekamp's discriminant
+\cite{Berl}: for square-free $F$ of degree $n$,
+\begin{equation}\label{eq:Berl-mu}
+\mu(F)=(-1)^n\chi\bigl(\beta(F)\bigr),\qquad
+\beta(F)=\sum_{i<j}\frac{\alpha_i\alpha_j}{(\alpha_i+\alpha_j)^2}=\frac{\xi(F)}{\delta(F)^2}\in\Fq,
+\end{equation}
+where $\alpha_1,\dots,\alpha_n$ are the roots of $F$, $\delta(F)^2=\mathrm{disc}\,F=\mathrm{Res}(F,F')$, and
+$\chi(x)=(-1)^{\Tr(x)}$ with $\Tr=\Tr_{\Fq/\Ftwo}$. Carmon \cite{Carmon} used \eqref{eq:Berl-mu} to bound $r$-point
+Chowla sums over the full space $\Me_n$ ($n>2$) in characteristic $2$. However, Carmon's method requires the denominator
+$\delta_f(a_0)=\delta(f+a_0)$ to have maximal degree $\lfloor(n-1)/2\rfloor$ in the constant term $a_0$, and discards
+the locus where $\deg_{a_0}\delta_f(a_0)<\lfloor(n-1)/2\rfloor$ as an exceptional set $C(1)$ \cite[(3.11)]{Carmon}
+(while treating $n=2$, where $\delta_f$ is constant, separately in \cite[Proposition~5.1]{Carmon}).
+
+When one restricts from $\Me_n$ to a short interval $I_m(f)=\{f+h:\deg h\le m\}$ with $m\le 2$, any monic polynomial
+$f\in\Me_n$ ($n=2d\ge 4$) with $\deg f'\le 1$ has $F'=a_1\in\Fq$ constant across $I_2(f)$. Thus
+$\delta(F)=a_1^d$ is independent of $a_0$, and the entire short interval $I_2(f)$ lies inside Carmon's discarded set
+$C(1)$ (and simultaneously violates the hypothesis $\gcd(p,n(n-1))=1$ of Kurlberg and Rosenzweig \cite[Theorem~13]{KR}).
+
+In \cite{ChenShort}, we resolved the Bank--Bary-Soroker--Rosenzweig short-interval problem \cite{BBR} on this locus.
+Writing $f=t^{2d}+\sum_{j=0}^{d-1}c_{2j}t^{2j}+c_1t$ and $h_j=\sqrt{c_{2j}}$, every member of $I_2(f)$ has the form
+\begin{equation}\label{eq:F-form}
+F(t)=H(t)^2+at,\qquad H=H_f+b_1t+b_0\in H_f+\Pe_{\le 1},\quad a\in\Fq,\qquad
+H_f(t)=t^d+\sum_{j=2}^{d-1}h_j t^j,
+\end{equation}
+and for $a\in\Fq^\times$ we proved the identity \cite[Proposition~2.2]{ChenShort}
+\begin{equation}\label{eq:parity-law}
+\beta(H^2+at)=\epsilon_d+\frac{\tau(H)^2}{a^2},\qquad
+\mu(H^2+at)=(-1)^{k\epsilon_d}\chi\!\left(\frac{\tau(H)}{a}\right),
+\end{equation}
+where $\epsilon_d=1$ if $d\equiv 2,3\pmod 4$ and $0$ if $d\equiv 0,1\pmod 4$, and
+\begin{equation}\label{eq:tau-def}
+\tau(H)=\sum_{H(\beta)=0}\beta H'(\beta)^2=\sum_{j\text{ odd}}h_j^2 p_{2j-1}(H)\in\Ftwo[h_0,\dots,h_{d-1}].
+\end{equation}
+
+\subsection{Main results}
+Our starting point is a structural theorem showing that although $\tau(H)$ is a polynomial of degree up to $2d-1$ in
+$(h_2,\dots,h_{d-1})$, its restriction $\tau_f(B_0,B_1)=\tau(H_f+B_1t+B_0)$ to any short interval $I_2(f)$ has an
+exceptionally simple algebraic form in $(B_0,B_1)$. Write $H_f(t)=V_f(t^2)+tU_f(t^2)$, so that
+\[
+U_f(u)=\sum_{\substack{3\le j\le d-1\\ j\text{ odd}}}h_j u^{(j-1)/2},\qquad
+V_f(u)=\sum_{\substack{2\le j\le d\\ j\text{ even}}}h_j u^{j/2}\quad(h_d=1).
+\]
+
+\begin{theorem}[bilinear and $\Ftwo$-affine structure of $\tau_f$]\label{thm:structure}
+Let $q=2^k$, $n=2d\ge 4$, and let $f\in\Fq[t]$ be monic of degree $n$ with $\deg f'\le 1$.
+\begin{enumerate}
+\item[(a)] If $d=2e+1\ge 3$ is odd ($n\equiv 2\pmod 4$), then $\tau_f(B_0,B_1)$ is bilinear in $(B_0,B_1)$:
+\begin{equation}\label{eq:tau-odd}
+\tau_f(B_0,B_1)=(B_0+c_0(f))(B_1+c_1(f))+\Delta(f),
+\end{equation}
+where $c_0(f),c_1(f),\Delta(f)\in\Ftwo[h_2,\dots,h_{d-1}]$ are given by $\Delta(f)=c_{00}(f)+c_0(f)c_1(f)$ and
+\begin{gather*}
+c_1(f)=[u^{-1}]\frac{U_f(u)V_f(u)^2}{u^2U_f(u)^2+uV_f(u)^2},\qquad
+c_0(f)=[u^{-1}]\frac{V_f(u)^3}{u^2U_f(u)^2+uV_f(u)^2},\\
+c_{00}(f)=[u^{-1}]\frac{U_f(u)^3V_f(u)}{uU_f(u)^2+V_f(u)^2}.
+\end{gather*}
+\item[(b)] \textup{(\cite[Theorem~3.2(b)]{ChenShort})} If $d=2e\ge 4$ is even ($n\equiv 0\pmod 4$, $n\ge 8$),
+then $\tau_f(B_0,B_1)$ is $\Ftwo$-affine in $(B_0,B_1)$:
+\begin{equation}\label{eq:tau-even}
+\tau_f(B_0,B_1)=T_{0,1}(f)B_0+T_1(f)B_1+h_{d-1}B_1^2+T_{0,0}(f),
+\end{equation}
+where $T_1(f),T_{0,1}(f),T_{0,0}(f)\in\Ftwo[h_2,\dots,h_{d-1}]$ are given by
+\begin{gather*}
+T_1(f)=[u^{-1}]\frac{U_f(u)^2V_f(u)}{V_f(u)^2+uU_f(u)^2},\qquad
+T_{0,1}(f)=[u^{-1}]\frac{U_f(u)^3}{V_f(u)^2+uU_f(u)^2},\\
+T_{0,0}(f)=[u^{-1}]\frac{U_f(u)^3V_f(u)}{V_f(u)^2+uU_f(u)^2}.
+\end{gather*}
+In particular, $I_2(f)$ is rigid ($\tau_f=0$) if and only if $h_{d-1}=T_1(f)=T_{0,1}(f)=T_{0,0}(f)=0$.
+\end{enumerate}
+\end{theorem}
+
+Part (a) is new; part (b) is \cite[Theorem~3.2(b)]{ChenShort} and is recalled for reference. Part (b) also bears on
+Question~(1) of \cite{ChenShort}. For every $n=8m\ge 16$, Proposition~\ref{prop:sporadic} shows that $\tau_f$ is
+constant on the $2m$-parameter family of $f$ with $\deg U_f=m$ and $\deg(V_f+\lambda^{-2}U_f^2)\le m$, where
+$\lambda$ is the leading coefficient of $U_f$. So the rigid intervals there form a hypersurface, which contains the
+rigid family of \cite[Proposition~3.3]{ChenShort} and an explicit linear family of dimension $2m-2$. For $m=2$ the
+hypersurface is the sporadic component of \cite[Table~1]{ChenShort}.
+
+Our first application of Theorem~\ref{thm:structure} gives an exact closed formula for the short-interval M\"obius sum
+over $I_2(f)$ for every $f$ with $\deg f'\le 1$.
+
+\begin{theorem}[exact short-interval M\"obius sums]\label{thm:mobius-I2}
+Let $q=2^k$, $n=2d\ge 4$, and let $f\in\Fq[t]$ be monic of degree $n$ with $\deg f'\le 1$. Let
+$N(\tau_f)=\#\{(b_0,b_1)\in\Fq^2:\tau_f(b_0,b_1)=0\}$. Then
+\begin{equation}\label{eq:mobius-master}
+\sum_{F\in I_2(f)}\mu(F)=(-1)^{k\epsilon_d}q\bigl(N(\tau_f)-q\bigr).
+\end{equation}
+Moreover:
+\begin{enumerate}
+\item[(a)] If $n=4$, then $\sum_{F\in I_2(f)}\mu(F)=0$.
+\item[(b)] If $n\equiv 2\pmod 4$ ($n\ge 6$), then
+\[
+\sum_{F\in I_2(f)}\mu(F)=\begin{cases}
+(-1)^{k\epsilon_d}q(q-1), & \text{if }\Delta(f)=0\text{ (in particular for all }n=6\text{)},\\
+-(-1)^{k\epsilon_d}q, & \text{if }\Delta(f)\ne 0.
+\end{cases}
+\]
+\item[(c)] If $n\equiv 0\pmod 4$ ($n\ge 8$), then, writing $T_*=T_*(f)$ and $\sigma=(-1)^{k\epsilon_d}$,
+\[
+\sum_{F\in I_2(f)}\mu(F)=\begin{cases}
+0, & \text{if }T_{0,1}\ne 0,\\
+0, & \text{if }T_{0,1}=0\text{ and exactly one of }T_1,h_{d-1}\text{ is nonzero},\\
+\sigma\,\chi\bigl(h_{d-1}T_{0,0}/T_1^2\bigr)q^2, & \text{if }T_{0,1}=0\text{ and }T_1h_{d-1}\ne 0,\\
+-\sigma q^2, & \text{if }T_{0,1}=T_1=h_{d-1}=0\ne T_{0,0},\\
+\sigma q^2(q-1), & \text{if }\tau_f=0.
+\end{cases}
+\]
+In particular, in each of \textup{(a)}--\textup{(c)}, whenever $\tau_f\ne 0$ one has
+$\bigl|\sum_{F\in I_2(f)}\mu(F)\bigr|\le q^2$.
+\item[(d)] (\emph{Very short intervals.}) Write $f=H_0^2+a_1t$ with $H_0=H_f+b_1t+b_0$, and define
+$\tau_0(H_0),\tau_1(H_0)\in\Fq$ by $\tau(H_0+B_0)=\tau_0(H_0)+\tau_1(H_0)B_0$; explicitly,
+$(\tau_0,\tau_1)=(b_1^3,0)$ if $d=2$,
+\[
+\tau_1=b_1+c_1(f),\quad \tau_0=b_0\bigl(b_1+c_1(f)\bigr)+c_0(f)b_1+c_{00}(f)\qquad\text{if $d$ is odd},
+\]
+and $\tau_1=T_{0,1}(f)$, $\tau_0=\tau_f(b_0,b_1)$ if $d\ge 4$ is even. Then, for $I_0(f)=f+\Fq$ (with $a_1\ne 0$)
+and $I_1(f)=f+\Pe_{\le 1}$,
+\[
+\sum_{F\in I_0(f)}\mu(F)=\begin{cases}
+0, & \text{if }\tau_1(H_0)\ne 0,\\
+(-1)^{k\epsilon_d}\chi\bigl(\tau_0(H_0)/a_1\bigr)q, & \text{if }\tau_1(H_0)=0,
+\end{cases}
+\]
+\[
+\sum_{F\in I_1(f)}\mu(F)=\begin{cases}
+0, & \text{if }\tau_1(H_0)\ne 0,\\
+-(-1)^{k\epsilon_d}q, & \text{if }\tau_1(H_0)=0\ne\tau_0(H_0),\\
+(-1)^{k\epsilon_d}q(q-1), & \text{if }\tau_1(H_0)=\tau_0(H_0)=0.
+\end{cases}
+\]
+\end{enumerate}
+\end{theorem}
+
+Our second application treats $r$-point Chowla correlation sums on $I_2(f)$, extending Carmon's $n=2$ trichotomy
+\cite[Proposition~5.1]{Carmon} to all even degrees $n=2d\ge 4$ and revealing a striking contrast with Theorem~5 of
+Kurlberg and Rosenzweig \cite{KR}.
+
+\begin{theorem}[short-interval Chowla correlations]\label{thm:chowla}
+Let $q=2^k$, $n=2d\ge 4$, and let $f\in\Fq[t]$ be monic of degree $n$ with $\deg f'\le 1$. Let
+$\alpha_1,\dots,\alpha_r\in\Pe_{\le 2}$ ($r\ge 2$) be distinct shifts, written as
+$\alpha_i(t)=\beta_{i,1}^2t^2+a_it+\beta_{i,0}^2$ with $\beta_{i,0},\beta_{i,1},a_i\in\Fq$. Put
+$A=\{a_i:1\le i\le r\}$, and for each $c\in A$ define
+\[
+\Theta_c(B_0,B_1)=\sum_{i:\,a_i=c}\tau_f(B_0+\beta_{i,0},B_1+\beta_{i,1})\in\Fq[B_0,B_1].
+\]
+For the correlation sum $\mathcal{C}_f(\alpha_1,\dots,\alpha_r)=\sum_{F\in I_2(f)}\prod_{i=1}^r\mu(F+\alpha_i)$:
+\begin{enumerate}
+\item[(a)] If $\Theta_c\ne 0$ for at least one $c\in A$, then
+\[
+\bigl|\mathcal{C}_f(\alpha_1,\dots,\alpha_r)\bigr|\le 2(|A|-1)q^{5/2}+O_{n,r}(q^2).
+\]
+If $|A|=1$ (all shifts have the same linear coefficient $a_1$) and $\Theta_{a_1}\ne 0$, then
+\[
+\mathcal{C}_f(\alpha_1,\dots,\alpha_r)=(-1)^{rk\epsilon_d}q\bigl(N(\Theta_{a_1})-q\bigr),
+\qquad \bigl|\mathcal{C}_f(\alpha_1,\dots,\alpha_r)\bigr|\le
+\begin{cases} q^2, & \text{if }n\ge 6,\\ 2q^2, & \text{if }n=4.\end{cases}
+\]
+\item[(b)] If $\Theta_c=0$ in $\Fq[B_0,B_1]$ for all $c\in A$, then there is no cancellation:
+\[
+\mathcal{C}_f(\alpha_1,\dots,\alpha_r)=(-1)^{rk\epsilon_d}q^2(q-|A|).
+\]
+\item[(c)] (\emph{Failure of $2$-point Chowla cancellation on $S_n$-intervals.}) Suppose $n=4$, or $n=4e\ge 8$ with
+$T_{0,1}(f)=0$ and $\tau_f\ne 0$ (which holds in particular whenever $\deg U_f\le\frac{2e-2}{3}$ and $\tau_f\ne 0$,
+and unconditionally for every $n=8m+4\ge 12$, $e=2m+1$, with $\deg U_f=m$, where $T_{0,1}(f)=h_{d-1}=0$ and
+$T_1(f)=h_{2m+1}^2\ne 0$). Then the geometric Galois group over $I_2(f)$ is $S_n$ and
+$\bigl|\sum_{F\in I_2(f)}\mu(F)\bigr|\le q^2$ (equal to $0$ when $n=4$ or exactly one of $T_1(f),h_{d-1}$ is nonzero,
+and to $-(-1)^{k\epsilon_d}q^2$ when $T_1(f)=h_{d-1}=0$), yet $\mu(F+c_0)=\mu(F)$ for every
+$F\in I_2(f)$ and every constant $c_0\in\Fq$, and for any distinct $c_1,c_2\in\Fq$ the $2$-point Chowla sum satisfies
+\[
+\sum_{F\in I_2(f)}\mu(F+c_1)\mu(F+c_2)=q^2(q-1).
+\]
+\item[(d)] (\emph{Parallelogram criterion.}) Let $n=4e\ge 8$ and let $f$ be arbitrary (no condition on $T_{0,1}(f)$).
+If $\alpha_1,\dots,\alpha_4\in\Pe_{\le 2}$ are distinct, have a common linear coefficient $a_1=\dots=a_4=c$, and satisfy
+$\alpha_1+\alpha_2+\alpha_3+\alpha_4=0$ (equivalently, the points $(\beta_{i,0},\beta_{i,1})$ are the four vertices
+$x,\,x+u,\,x+v,\,x+u+v$ of an $\Ftwo$-affine plane in $\Fq^2$), then $\Theta_c=0$ and
+\[
+\sum_{F\in I_2(f)}\mu(F+\alpha_1)\mu(F+\alpha_2)\mu(F+\alpha_3)\mu(F+\alpha_4)=q^2(q-1).
+\]
+\end{enumerate}
+\end{theorem}
+
+Our third application addresses a problem posed by Sawin and Shusterman in \cite[\S1.5]{SS}, who asked for
+cancellation in ``polynomial M\"obius sums'' of the form $\sum_{H\in\Me_d}\mu(H^2+t)$. Using Theorem~\ref{thm:structure}
+to fiber $\Me_d$ into the $q^{d-2}$ affine planes $H_f+\Pe_{\le 1}$, we obtain full $1/q$ cancellation for every
+$d\ge 3$, together with exact closed formulas for $d\le 6$:
+
+\begin{theorem}[polynomial M\"obius sums]\label{thm:poly-mobius}
+Let $q=2^k$, $a\in\Fq^\times$, and let $\Me_d\subset\Fq[t]$ be the set of monic polynomials of degree $d\ge 1$.
+\begin{enumerate}
+\item[(a)] For $1\le d\le 6$, with $S_3(a)=\sum_{b\in\Fq}\chi(b^3/a)$,
+\begin{align*}
+\sum_{H\in\Me_1}\mu(H^2+at)&=0,&
+\sum_{H\in\Me_2}\mu(H^2+at)&=(-1)^k q\,S_3(a),\\
+\sum_{H\in\Me_3}\mu(H^2+at)&=(-1)^k q^2,&
+\sum_{H\in\Me_4}\mu(H^2+at)&=q^3,\\
+\sum_{H\in\Me_5}\mu(H^2+at)&=q^3S_3(a),&
+\sum_{H\in\Me_6}\mu(H^2+at)&=(-1)^kq^4+q^3(q-1),
+\end{align*}
+where $S_3(a)=0$ when $k$ is odd and $S_3(a)\in\{(-1)^{k/2-1}2q^{1/2},(-1)^{k/2}q^{1/2}\}$ when $k$ is even.
+\item[(b)] For every odd $d\ge 3$,
+\[
+\sum_{H\in\Me_d}\mu(H^2+at)=(-1)^{k\epsilon_d}q\sum_{h_2,\dots,h_{d-1}\in\Fq}
+\chi\!\left(\frac{\Delta(h_2,\dots,h_{d-1})}{a}\right),
+\]
+and consequently $\bigl|\sum_{H\in\Me_d}\mu(H^2+at)\bigr|\le q^{d-1}=|\Me_d|/q$.
+\item[(c)] For every even $d\ge 4$,
+\[
+\sum_{H\in\Me_d}\mu(H^2+at)=(-1)^{k\epsilon_d}q^2\sum_{\substack{(h_2,\dots,h_{d-1})\in\Fq^{d-2}\\
+T_{0,1}(h)=0,\;T_1(h)^2=ah_{d-1}}}\chi\!\left(\frac{T_{0,0}(h)}{a}\right),
+\]
+and consequently $\bigl|\sum_{H\in\Me_d}\mu(H^2+at)\bigr|\le (d-1)q^{d-1}$.
+\end{enumerate}
+\end{theorem}
+
+\section{Algebraic structure of \texorpdfstring{$\tau_f$}{tau\_f} and the sporadic rigid family}\label{sec:structure}
+
+Recall from \cite[Lemma~3.1]{ChenShort} that for any monic $H(t)=V(t^2)+tU(t^2)$ of degree $d$, $\tau(H)$ is the
+coefficient of $u^{-1}$ in the expansion at $u=\infty$ of the rational function
+\begin{equation}\label{eq:residue}
+\frac{U(u)^3V(u)}{V(u)^2+uU(u)^2}.
+\end{equation}
+
+\begin{proof}[Proof of Theorem~\ref{thm:structure}]
+For $H=H_f+B_1t+B_0$, we have $U(u)=U_f(u)+B_1$ and $V(u)=V_f(u)+B_0$, with $U_f(0)=V_f(0)=0$.
+
+(a) Let $d=2e+1\ge 3$ be odd. Then $\deg_u U_f=e$ ($U_f$ is monic) and $\deg_u V_f\le e$. In the formal Laurent ring
+$\Fq[B_0,B_1]((u^{-1}))$, since $\deg_u(V^2/(uU^2))\le 2e-(2e+1)=-1$, we have the geometric series expansion
+\[
+\frac{U^3V}{uU^2+V^2}=u^{-1}UV\cdot\frac{1}{1+u^{-1}(V/U)^2}
+=u^{-1}UV+\sum_{i\ge 1}\frac{V^{2i+1}}{u^{i+1}U^{2i-1}}.
+\]
+In the $i=0$ term $u^{-1}U(u)V(u)=u^{-1}(U_f(u)+B_1)(V_f(u)+B_0)$, since $U_f(0)=V_f(0)=0$, the constant term of
+$U(u)V(u)$ is $B_0B_1$, so $[u^{-1}](u^{-1}UV)=B_0B_1$. For $i\ge 1$, expanding $V^{2i+1}=(V_f+B_0)^{2i+1}$ and
+$U^{-(2i-1)}=U_f^{-(2i-1)}(1+B_1/U_f)^{-(2i-1)}=\sum_{m\ge 0}\binom{-2i+1}{m}U_f^{-(2i-1+m)}B_1^m$, the coefficient of
+$B_0^rB_1^m$ in the $i$-th summand has $u$-degree at most
+\[
+(2i+1-r)e-(i+1)-(2i-1+m)e=(2-r-m)e-i-1.
+\]
+If $r+m\ge 2$, then $(2-r-m)e-i-1\le -i-1\le -2$ for all $i\ge 1$, so no monomial $B_0^rB_1^m$ with $r+m\ge 2$
+contributes to $[u^{-1}]$ for $i\ge 1$. Thus $\tau_f(B_0,B_1)=B_0B_1+c_1(f)B_0+c_0(f)B_1+c_{00}(f)$. Since
+$\binom{2i+1}{1}\equiv\binom{-2i+1}{1}\equiv 1\pmod 2$, the coefficients of $B_0^1B_1^0$ and $B_0^0B_1^1$ sum over
+$i\ge 1$ to the stated rational expressions for $c_1(f)$ and $c_0(f)$, and setting $B_0=B_1=0$ gives $c_{00}(f)$.
+
+(b) This is \cite[Theorem~3.2(b)]{ChenShort}: with $G_0=V_f^2+uU_f^2$, monic of degree $2e$, one expands
+$1/(G_0+B_0^2+uB_1^2)$ in powers of $(B_0^2+uB_1^2)/G_0$ and checks by degree that only the four displayed terms reach
+$u^{-1}$.
+\end{proof}
+
+For $n=8m\ge16$, \cite[Proposition~3.3]{ChenShort} shows that $V_f=\lambda^{-2}U_f^2+\lambda^2u$, with $\deg U_f=m$
+and leading coefficient $\lambda$, gives a rigid interval, and \cite[Question~(1)]{ChenShort} asks for the rigid
+components containing these intervals. The next proposition embeds them in a $2m$-parameter family on which
+$\tau_f$ is constant, so that the rigid locus there is cut out by a single equation.
+
+\begin{proposition}[a rigid hypersurface for $n=8m$]\label{prop:sporadic}
+Let $n=8m\ge 16$ ($d=4m$, $e=2m$). Let $U_f\in\Fq[u]$ have degree $m$, $U_f(0)=0$ and leading coefficient
+$\lambda=h_{2m+1}\in\Fq^\times$, let $W_0=\sum_{j=1}^{m}w_ju^j\in\Fq[u]$, and put
+\[
+V_f=\lambda^{-2}U_f^2+\lambda^2u+W_0,\qquad R=\lambda^{-2}U_f^2W_0+W_0^2+\lambda^4u^2 .
+\]
+Equivalently, $\deg U_f=m$ and $\deg_u\bigl(V_f+\lambda^{-2}U_f^2\bigr)\le m$.
+\begin{enumerate}
+\item[(a)] $h_{d-1}=T_{0,1}(f)=T_1(f)=0$, so $\tau_f$ is the constant
+$T_{0,0}(f)=\lambda^2\,[u^{-1}]\,U_fR/G_0$, where $G_0=V_f^2+uU_f^2$.
+\item[(b)] If $\deg W_0\le m-1$, then $T_{0,0}(f)=\lambda^3w_{m-1}$. In particular $I_2(f)$ is rigid whenever
+$\deg W_0\le m-2$; for $W_0=0$ this is \cite[Proposition~3.3]{ChenShort}.
+\end{enumerate}
+Thus, in the $2m$-dimensional family of the $f$ with $\deg U_f=m$ and $\deg(V_f+\lambda^{-2}U_f^2)\le m$, the
+rigid intervals form the hypersurface $T_{0,0}(f)=0$, which contains the linear subfamily $w_{m-1}=w_m=0$ and is
+not the whole family.
+\end{proposition}
+
+\begin{proof}
+$V_f$ is monic of degree $2m$ with $V_f(0)=0$. Since $V_f^2=\lambda^{-4}U_f^4+\lambda^4u^2+W_0^2$ and
+$\lambda^{-2}U_f^2V_f=\lambda^{-4}U_f^4+uU_f^2+\lambda^{-2}U_f^2W_0$, we get
+\[
+G_0=\lambda^{-2}U_f^2V_f+R,\qquad\text{i.e.}\qquad U_f^2V_f=\lambda^2(G_0+R),
+\]
+with $G_0$ monic of degree $4m$ and $\deg R\le 3m$. As $m<2m-1$, $h_{d-1}=0$. Now
+\[
+\frac{U_f^2V_f}{G_0}=\lambda^2+\frac{\lambda^2R}{G_0},\qquad
+\frac{U_f^3V_f}{G_0}=\lambda^2U_f+\frac{\lambda^2U_fR}{G_0},
+\]
+and $R/G_0$ and $U_f^3/G_0$ have degree at most $-m\le-2$. So $T_1(f)=T_{0,1}(f)=0$ and
+$T_{0,0}(f)=\lambda^2[u^{-1}]U_fR/G_0$, which is (a). If $\deg W_0\le m-1$, then in $U_fR$ the term
+$\lambda^{-2}U_f^3W_0$ has degree at most $4m-1$ with coefficient $\lambda w_{m-1}$ at $u^{4m-1}$, while $U_fW_0^2$
+and $\lambda^4u^2U_f$ have degrees at most $3m-2$ and $m+2<4m-1$. Hence $[u^{-1}]U_fR/G_0=\lambda w_{m-1}$, which is
+(b). Finally $T_{0,0}\not\equiv0$ on the family by (b), so its zero set is a hypersurface.
+\end{proof}
+
+\begin{remark}\label{rem:n16}
+For $n=16$ ($m=2$, $e=4$) the family of Proposition~\ref{prop:sporadic} is exactly $\{h_7=h_6=0,\ h_5=\lambda\ne0\}$,
+with $w_1=h_2+\lambda^2$ and $w_2=h_4+\lambda^{-2}h_3^2$, and the formula below reads
+$T_{0,0}(f)=\lambda^2(\lambda w_1+h_3w_2)$. For general $h_6$ one has $h_7=0$,
+$T_{0,1}(f)=0$, $T_1(f)=\lambda^2h_6$ and
+$T_{0,0}(f)|_{h_6=0}=\lambda^3(h_2+\lambda^2)+h_3(\lambda^2h_4+h_3^2)$. Hence the rigid intervals with $\deg U_f=2$
+are exactly those with $h_7=h_6=0$ and $h_2=\lambda^2+\lambda^{-3}h_3(\lambda^2h_4+h_3^2)$, giving $(q-1)q^2$ rigid
+polynomials $f$: this is the sporadic component of \cite[Table~1]{ChenShort}, and \cite[Proposition~3.3]{ChenShort}
+is its subfamily $h_4=\lambda^{-2}h_3^2$.
+
+Indeed, $U_f=\lambda u^2+h_3u$, $V_f=u^4+h_6u^3+h_4u^2+h_2u$ and
+$G_0=u^8+h_6^2u^6+\lambda^2u^5+h_4^2u^4+h_3^2u^3+h_2^2u^2$; $h_7=0$ and $T_{0,1}(f)=0$ because
+$\deg_u U_f^3=6\le\deg_uG_0-2$. Dividing, $U_f^2V_f=\lambda^2G_0+\lambda^2h_6u^7+(\text{lower terms})$, so
+$T_1(f)=\lambda^2h_6$. For $h_6=0$, $1/G_0=u^{-8}\bigl(1+\lambda^2u^{-3}+O(u^{-4})\bigr)$, and writing
+$U_f^3V_f=\sum_jN_ju^j$ we get $T_{0,0}(f)=N_7+\lambda^2N_{10}$ with $N_{10}=\lambda^3$ and
+$N_7=\lambda^3h_2+h_3(\lambda^2h_4+h_3^2)$, which is the stated formula.
+\end{remark}
+
+\section{Short-interval M\"obius and Chowla sums}\label{sec:mobius-chowla}
+
+\begin{proof}[Proof of Theorem~\ref{thm:mobius-I2}]
+By \eqref{eq:F-form}, the $q^2$ polynomials in $I_2(f)$ with $a=0$ are squares and have $\mu(F)=0$. For the $q^2(q-1)$
+separable polynomials with $a\in\Fq^\times$, \eqref{eq:parity-law} gives
+\[
+\sum_{F\in I_2(f)}\mu(F)=(-1)^{k\epsilon_d}\sum_{(b_0,b_1)\in\Fq^2}\sum_{a\in\Fq^\times}
+\chi\!\left(\frac{\tau_f(b_0,b_1)}{a}\right).
+\]
+As $a$ runs over $\Fq^\times$, $1/a$ also runs over $\Fq^\times$. The inner sum is $q-1$ if $\tau_f(b_0,b_1)=0$ and
+$-1$ if $\tau_f(b_0,b_1)\ne 0$. Summing over $(b_0,b_1)\in\Fq^2$ gives
+$N(\tau_f)(q-1)-(q^2-N(\tau_f))=q(N(\tau_f)-q)$, which is \eqref{eq:mobius-master}.
+
+(a) For $n=4$ ($d=2$), $\tau_f(B_0,B_1)=B_1^3$ \cite[Theorem~3.2(a)]{ChenShort}, so $N(\tau_f)=q$ and the sum is $0$.
+
+(b) For $n\equiv 2\pmod 4$ ($d\ge 3$ odd), Theorem~\ref{thm:structure}(a) gives
+$\tau_f(b_0,b_1)=(b_0+c_0)(b_1+c_1)+\Delta$. If $\Delta=0$, the zero locus is the union of the two lines $b_0=c_0$ and
+$b_1=c_1$, so $N(\tau_f)=2q-1$. If $\Delta\ne 0$, the hyperbola $(b_0+c_0)(b_1+c_1)=\Delta$ has a unique point for each
+$b_1\ne c_1$ and none for $b_1=c_1$, so $N(\tau_f)=q-1$. Substituting into \eqref{eq:mobius-master} gives (b).
+
+(c) For $n\equiv 0\pmod 4$ ($d\ge 4$ even), Theorem~\ref{thm:structure}(b) gives
+$\tau_f(b_0,b_1)=T_{0,1}b_0+T_1b_1+h_{d-1}b_1^2+T_{0,0}$. If $T_{0,1}\ne 0$, each $b_1\in\Fq$ determines a unique
+$b_0\in\Fq$, so $N(\tau_f)=q$. If $T_{0,1}=0$ and exactly one of $T_1,h_{d-1}$ is nonzero, then $b_1\mapsto T_1b_1+h_{d-1}b_1^2$
+is a bijection of $\Fq$, so again $N(\tau_f)=q$. If $T_{0,1}=0$ and $T_1h_{d-1}\ne 0$, the quadratic equation
+$h_{d-1}b_1^2+T_1b_1=T_{0,0}$ has $1+\chi(h_{d-1}T_{0,0}/T_1^2)\in\{0,2\}$ solutions $b_1\in\Fq$, so
+$N(\tau_f)-q=\chi(h_{d-1}T_{0,0}/T_1^2)q$. Finally, if $T_{0,1}=T_1=h_{d-1}=0$, then $N(\tau_f)=0$ when $T_{0,0}\ne 0$
+and $N(\tau_f)=q^2$ when $T_{0,0}=0$.
+
+(d) Since $c\mapsto c^2$ is a bijection of $\Fq$, $I_0(f)=\{(H_0+B_0)^2+a_1t:B_0\in\Fq\}$ and
+$I_1(f)=\{(H_0+B_0)^2+at:a,B_0\in\Fq\}$. By Theorem~\ref{thm:structure} (or $\tau=B_1^3$ for $d=2$),
+$\tau(H_0+B_0)=\tau_f(b_0+B_0,b_1)$ is affine in $B_0$ with the stated $\tau_0,\tau_1$. By \eqref{eq:parity-law},
+$\sum_{F\in I_0(f)}\mu(F)=(-1)^{k\epsilon_d}\sum_{B_0}\chi\bigl((\tau_0+\tau_1B_0)/a_1\bigr)$, which is $0$ if
+$\tau_1\ne 0$ and $(-1)^{k\epsilon_d}q\chi(\tau_0/a_1)$ if $\tau_1=0$. For $I_1(f)$ the terms with $a=0$ are squares;
+summing the previous expression over $a\in\Fq^\times$ gives $0$ if $\tau_1\ne 0$, and otherwise
+$(-1)^{k\epsilon_d}q\sum_{a\ne 0}\chi(\tau_0/a)$, which is $(-1)^{k\epsilon_d}q(q-1)$ or $-(-1)^{k\epsilon_d}q$
+according as $\tau_0=0$ or not.
+\end{proof}
+
+\begin{remark}\label{rem:KR}
+Kurlberg and Rosenzweig \cite[Theorem~13]{KR} treat M\"obius sums over the very short intervals $I_0(f)$ and $I_1(f)$
+under the hypothesis $\gcd(p,n(n-1))=1$, which is never satisfied for $p=2$ since $n(n-1)$ is even. In Carmon's
+approach \cite{Carmon}, $\mu$ on $I_0(f)$ is governed by $B_f(c)=\beta(f+c)$, whose denominator $\delta(f+c)^2=a_1^{2d}$
+is constant when $\deg f'\le 1$, so these $f$ fall into the exceptional set $C(1)$.
+Theorem~\ref{thm:mobius-I2}(d) shows what happens there: by \eqref{eq:parity-law},
+$B_f(B_0^2)=\epsilon_d+\bigl(\tau_0(H_0)+\tau_1(H_0)B_0\bigr)^2/a_1^2$, i.e.\ up to the constant $\epsilon_d$ Carmon's
+function is the square of an affine-linear function of $B_0$.
+\end{remark}
+
+\begin{proof}[Proof of Theorem~\ref{thm:chowla}]
+For $F=H^2+at\in I_2(f)$ with $H=H_f+b_1t+b_0$, we have $F+\alpha_i=(H+\beta_{i,1}t+\beta_{i,0})^2+(a+a_i)t$. Thus
+$\prod_{i=1}^r\mu(F+\alpha_i)=0$ if $a\in A$, and for $a\notin A$, \eqref{eq:parity-law} and the additivity of $\Tr$
+give
+\[
+\mathcal{C}_f(\alpha_1,\dots,\alpha_r)=(-1)^{rk\epsilon_d}\sum_{(b_0,b_1)\in\Fq^2}\sum_{a\in\Fq\setminus A}
+\chi\!\left(\sum_{c\in A}\frac{\Theta_c(b_0,b_1)}{a+c}\right).
+\]
+If $\Theta_c=0$ identically for all $c\in A$, the inner summand is $1$ for all $a\notin A$ and all $(b_0,b_1)\in\Fq^2$,
+giving $(-1)^{rk\epsilon_d}q^2(q-|A|)$, which proves (b).
+
+Suppose $\Theta_{c^*}\ne 0$ for some $c^*\in A$. Since $\deg\Theta_{c^*}\le 2d-1$, there are at most $(2d-1)q$ pairs
+$(b_0,b_1)\in\Fq^2$ with $\Theta_{c^*}(b_0,b_1)=0$, contributing at most $(2d-1)q^2$ in total. For each $(b_0,b_1)$
+with $\Theta_{c^*}(b_0,b_1)\ne 0$, if $|A|=1$ ($A=\{a_1\}$), the inner sum over $a\ne a_1$ equals $-1$, which gives the
+exact formula of (a) as in the proof of Theorem~\ref{thm:mobius-I2}. For the bound in that case: if $n\ge 6$, then
+by Theorem~\ref{thm:structure}, $\Theta_{a_1}$ is a sum of translates of $\tau_f$ and is therefore bilinear ($d$ odd)
+or $\Ftwo$-affine ($d$ even) of the same shape, so $|N(\Theta_{a_1})-q|\le q$ by the case analysis in the proof of
+Theorem~\ref{thm:mobius-I2}; if $n=4$, then $\Theta_{a_1}(B_1)=\sum_i(B_1+\beta_{i,1})^3$ is a nonzero polynomial of
+degree at most $3$ in $B_1$ alone, so $0\le N(\Theta_{a_1})\le 3q$ and $|\mathcal{C}_f|\le 2q^2$. If $|A|\ge 2$, the rational function
+$p(a)=\sum_{c\in A}\frac{\Theta_c(b_0,b_1)}{a+c}$ has simple poles at those $c\in A$ with $\Theta_c(b_0,b_1)\ne 0$ (at
+least one, at $c^*$, and at most $|A|$); by the Perel'muter--Weil bound \cite[Theorem~3.1]{Carmon}, the Artin--Schreier
+curve $y^2+y=p(a)$ has genus $g\le |A|-1$, so $\bigl|\sum_{a\notin A}\chi(p(a))\bigr|\le 2(|A|-1)q^{1/2}+|A|$. Summing
+over $(b_0,b_1)\in\Fq^2$ gives (a).
+
+Finally, for (c), if $n=4$ then $\tau_f(B_0,B_1)=B_1^3$ is independent of $B_0$. If $n=4e\ge 8$ and
+$\delta=\deg U_f\le\frac{2e-2}{3}$, then $\deg_u(U_f^3)-2e=3\delta-2e\le -2$, so
+$T_{0,1}(f)=[u^{-1}]\frac{U_f^3}{V_f^2+uU_f^2}=0$. If moreover $e=2m+1\ge 3$ and $\deg U_f=m$ with leading coefficient
+$\lambda=h_{2m+1}\ne 0$, then $G_0=V_f^2+uU_f^2$ is monic of degree $2e$ and $\deg_u(U_f^2V_f)=2m+e=2e-1=\deg_uG_0-1$,
+so $T_1(f)=[u^{-1}]\frac{U_f^2V_f}{G_0}=\lambda^2\ne 0$; also $h_{d-1}=0$ since $\deg U_f=m<2m=e-1$, and
+$\deg_u(U_f^3)=3m\le 2e-2$ gives $T_{0,1}(f)=0$. In particular $\tau_f\ne 0$ and, by Theorem~\ref{thm:mobius-I2}(c),
+$\sum_{F\in I_2(f)}\mu(F)=0$. In all cases with $T_{0,1}(f)=0$, Theorem~\ref{thm:structure}(b) gives
+$\tau_f(B_0+b_0,B_1)=\tau_f(B_0,B_1)$, so $\mu(F+b_0^2)=\mu(F)$ for all $b_0\in\Fq$ and
+part (b) applies to $\alpha_1=c_1$, $\alpha_2=c_2$ with $|A|=1$ and $\Theta_0=0$.
+
+For (d), by \eqref{eq:tau-even} we have $\tau_f(x)=L(x)+T_{0,0}(f)$ for $x=(B_0,B_1)$, where
+$L(B_0,B_1)=T_{0,1}(f)B_0+T_1(f)B_1+h_{d-1}B_1^2$ is additive. Writing $\beta_i=(\beta_{i,0},\beta_{i,1})$, the
+condition $\sum_i\alpha_i=0$ reads $(\sum_i\beta_{i,1})^2t^2+4c\,t+(\sum_i\beta_{i,0})^2=0$, i.e.\ $\sum_i\beta_i=0$.
+Hence $\Theta_c(x)=\sum_{i=1}^4\bigl(L(x)+L(\beta_i)+T_{0,0}(f)\bigr)=L\bigl(\sum_i\beta_i\bigr)=0$, and part (b)
+with $r=4$, $|A|=1$ gives $q^2(q-1)$.
+\end{proof}
+
+\section{Polynomial M\"obius sums: proof of
+\texorpdfstring{Theorem~\ref{thm:poly-mobius}}{Theorem 1.4}}\label{sec:poly}
+
+\begin{proof}[Proof of Theorem~\ref{thm:poly-mobius}]
+Every $H\in\Me_d$ is uniquely written as $H=H_f+b_1t+b_0$ with $h=(h_2,\dots,h_{d-1})\in\Fq^{d-2}$ and
+$(b_0,b_1)\in\Fq^2$. For $a\in\Fq^\times$, every $H^2+at$ is separable, and \eqref{eq:parity-law} gives
+\begin{equation}\label{eq:poly-fiber}
+\sum_{H\in\Me_d}\mu(H^2+at)=(-1)^{k\epsilon_d}\sum_{h\in\Fq^{d-2}}\sum_{(b_0,b_1)\in\Fq^2}
+\chi\!\left(\frac{\tau_f(b_0,b_1)}{a}\right).
+\end{equation}
+
+For $d=1$, $H=t+b_0$ has $\tau(H)=b_0$, so $\sum_{b_0\in\Fq}\chi(b_0/a)=0$. For $d=2$, $H=t^2+b_1t+b_0$ has
+$\tau(H)=b_1^3$ and $\epsilon_2=1$, giving $(-1)^k q\sum_{b_1\in\Fq}\chi(b_1^3/a)$; when $k$ is odd, $\gcd(3,q-1)=1$ so
+$b_1\mapsto b_1^3$ is a bijection of $\Fq$ and the sum is $0$, while for $k$ even the cubic Gauss sum over $\Fq$ takes
+values in $\{(-1)^{k/2-1}2q^{1/2},(-1)^{k/2}q^{1/2}\}$.
+
+For $d=2e+1\ge 3$ odd, substituting \eqref{eq:tau-odd} into the inner sum of \eqref{eq:poly-fiber} and summing first
+over $b_0\in\Fq$, the terms with $b_1\ne c_1(h)$ vanish by character orthogonality, while $b_1=c_1(h)$ contributes
+$q\,\chi(\Delta(h)/a)$. Summing over $h\in\Fq^{d-2}$ gives Theorem~\ref{thm:poly-mobius}(b), and the triangle
+inequality gives the bound $q\cdot q^{d-2}=q^{d-1}$. For $d=3$, $\tau(H)=(b_0+h_2^3)(b_1+h_2^2)$ has $\Delta(h_2)=0$,
+so the sum equals $(-1)^k q^2$.
+
+For $d=5$ ($e=2$, $\epsilon_5=0$), $U_f=u^2+h_3u$, $V_f=h_4u^2+h_2u$ and $uU_f^2+V_f^2=u^5(1+h_4^2u^{-1}+h_3^2u^{-2}
++h_2^2u^{-3})$, whose inverse is $u^{-5}\sum_m s_mu^{-m}$ with $s_0=1$, $s_1=h_4^2$, $s_2=h_4^4+h_3^2$,
+$s_3=h_4^6+h_2^2$, $s_4=h_4^8+h_3^2h_4^4+h_3^4$. Expanding the three residues of
+Theorem~\ref{thm:structure}(a) gives
+\[
+c_1=h_4^2(h_4^2+h_3),\qquad c_0=h_4^2(h_4^3+h_2),\qquad c_{00}=c_0c_1+h_2^3+h_2^2h_3h_4+h_2h_3^2h_4^2+h_3^3h_4^3,
+\]
+so $\Delta(h_2,h_3,h_4)=(h_2+h_3h_4)^3$. Substituting $h_2\mapsto h_2+h_3h_4$ in (b) gives
+$\sum_{H\in\Me_5}\mu(H^2+at)=q\cdot q^2S_3(a)$.
+
+For $d=2e\ge 4$ even, substituting \eqref{eq:tau-even} into \eqref{eq:poly-fiber} and using $\Tr(x^2)=\Tr(x)$, the
+inner double sum is
+\[
+\chi\!\left(\frac{T_{0,0}(h)}{a}\right)\Bigl(\sum_{b_0\in\Fq}\chi\!\left(\frac{T_{0,1}(h)}{a}b_0\right)\Bigr)
+\Bigl(\sum_{b_1\in\Fq}\chi\!\left(\frac{T_1(h)+\sqrt{ah_{d-1}}}{a}b_1\right)\Bigr),
+\]
+which equals $q^2\chi(T_{0,0}(h)/a)$ if $T_{0,1}(h)=0$ and $T_1(h)^2=ah_{d-1}$, and $0$ otherwise. This gives the
+formula in Theorem~\ref{thm:poly-mobius}(c). For $d=4$, $\tau(H)$ has $T_{0,1}(h_2,h_3)=h_3^3$, $T_1(h_2,h_3)=h_3^4+h_2h_3^2$,
+and $T_{0,0}(h_2,h_3)=h_3^7+h_2h_3^5+h_2^2h_3^3$ \cite[\S2]{ChenShort}, so $T_{0,1}=0\iff h_3=0$, which forces
+$T_1=T_{0,0}=0$ for all $h_2\in\Fq$; the $q$ pairs $(h_2,0)$ each contribute $q^2$, giving $\sum_{H\in\Me_4}\mu(H^2+at)=q^3$.
+
+For $d=6$ ($e=3$, $\epsilon_6=1$), $U_f=h_5u^2+h_3u$, $V_f=u^3+h_4u^2+h_2u$, and
+$G_0=u^6(1+h_5^2u^{-1}+h_4^2u^{-2}+h_3^2u^{-3}+h_2^2u^{-4})$. The same expansion gives
+\[
+T_{0,1}=h_5^2(h_3+h_5^3),\qquad T_1=h_3^2+h_5^2\bigl(h_2+h_4h_5^2+h_4^2+h_5^4\bigr),\qquad h_{d-1}=h_5.
+\]
+The conditions $T_{0,1}=0$, $T_1^2=ah_5$ in (c) have two kinds of solutions. If $h_5=0$, then $T_1=h_3^2$ forces
+$h_3=0$, so $U_f=0$ and $T_{0,0}=0$: this gives $q^2$ tuples $(h_2,h_4)$, each contributing $\chi(0)=1$. If
+$h_5=c\ne 0$, then $h_3=c^3$ and $T_1=c^2w$ with $w=h_2+h_4c^2+h_4^2$, and $T_1^2=ac$ means $w^2=a/c^3$; this
+determines $h_2$ uniquely, giving $q(q-1)$ tuples $(c,h_4)$. On this locus a direct expansion gives
+$T_{0,0}=c^3\bigl(w^2+yw+y^2\bigr)$ with $y=c^4+h_4^2$, so $T_{0,0}/a=1+(y/w)+(y/w)^2$ and
+$\chi(T_{0,0}/a)=\chi(1)=(-1)^k$. Therefore
+$\sum_{H\in\Me_6}\mu(H^2+at)=(-1)^kq^2\bigl(q^2+(-1)^kq(q-1)\bigr)=(-1)^kq^4+q^3(q-1)$.
+In particular, for $k$ odd the terms of order $q^4$ cancel and $\sum_{H\in\Me_6}\mu(H^2+at)=-q^3$.
+
+In general, for $d=2e\ge 4$, $T_{0,1}(h_2,\dots,h_{d-1})$ is isobaric of weight $d-1$, hence has total degree at most
+$d-1$ in $(h_2,\dots,h_{d-1})$. At $h_2=\dots=h_{d-2}=0$, we have $U_f(u)=h_{d-1}u^{e-1}$ and $V_f(u)=u^e$, so
+\[
+T_{0,1}(0,\dots,0,h_{d-1})=[u^{-1}]\frac{h_{d-1}^3u^{3e-3}}{u^{2e}+h_{d-1}^2u^{2e-1}}
+=[u^{-1}]\sum_{j\ge 0}h_{d-1}^{2j+3}u^{e-3-j}=h_{d-1}^{2e-1}=h_{d-1}^{d-1}.
+\]
+Thus $T_{0,1}$ is a nonzero polynomial of degree $d-1$ in $\Fq[h_2,\dots,h_{d-1}]$, so it has at most $(d-1)q^{d-3}$
+zeros in $\Fq^{d-2}$. Multiplying by $q^2$ gives the bound $(d-1)q^{d-1}$.
+\end{proof}
+
+\subsection*{Data and code}
+All theorems of this paper, including every case of the closed formulas, were checked independently by direct
+factorisation of polynomials over $\mathbb{F}_{2^k}$ with the pure-Python scripts \texttt{code/verify\_mobius\_chowla.py}
+(exhaustive checks) and \texttt{code/extra\_checks.py} (supplementary checks: the parity law, the case splits of
+Theorems~\ref{thm:mobius-I2} and~\ref{thm:chowla}, the closed forms for $d\le6$ in Theorem~\ref{thm:poly-mobius},
+Proposition~\ref{prop:sporadic} and Remark~\ref{rem:n16}). Neither script uses third-party packages.
+
+\begin{thebibliography}{99}
+
+\bibitem{BBR} E. Bank, L. Bary-Soroker and L. Rosenzweig, \emph{Prime polynomials in short intervals and in arithmetic
+progressions}, Duke Math. J. \textbf{164} (2015), 277--295.
+
+\bibitem{Berl} E. R. Berlekamp, \emph{An analog to the discriminant over fields of characteristic two}, J. Algebra
+\textbf{38} (1976), 315--317.
+
+\bibitem{Carmon} D. Carmon, \emph{The autocorrelation of the M\"obius function and Chowla's conjecture for the rational
+function field in characteristic $2$}, Philos. Trans. R. Soc. A \textbf{373} (2015), 20140311.
+
+\bibitem{CaRu} D. Carmon and Z. Rudnick, \emph{The autocorrelation of the M\"obius function and Chowla's conjecture for
+the rational function field}, Q. J. Math. \textbf{65} (2014), 53--61.
+
+\bibitem{ChenShort} R. Chen, \emph{Resolution of the characteristic-$2$ short-interval problem of
+Bank--Bary-Soroker--Rosenzweig}, preprint (2026), doi:10.5281/zenodo.24222056.
+
+\bibitem{KR} P. Kurlberg and L. Rosenzweig, \emph{Prime and M\"obius correlations for very short intervals in
+$\Fq[x]$}, Amer. J. Math. \textbf{142} (2020), 1929--1953.
+
+\bibitem{SS} W. Sawin and M. Shusterman, \emph{On the Chowla and twin primes conjectures over $\Fq[T]$}, Ann. of Math.
+(2) \textbf{196} (2022), 457--506.
+
+\bibitem{Swan} R. G. Swan, \emph{Factorization of polynomials over finite fields}, Pacific J. Math. \textbf{12} (1962),
+1099--1106.
+
+\end{thebibliography}
+
+\end{document}
